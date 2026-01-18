@@ -53,7 +53,6 @@ function startGame(level){
   const trashItems=generateLevel(level);
   total=trashItems.length;
 
-  // Rodyti visas šiukšles viename lange
   trashItems.forEach(item=>{
     const div=document.createElement("div");
     div.className="trash-item";
@@ -67,16 +66,14 @@ function startGame(level){
     trashArea.appendChild(div);
   });
 
-  // Konteineriai
   bins.forEach(bin=>{
     const div=document.createElement("div");
     div.className="bin";
     div.textContent=bin.name;
     div.onclick=()=>{
       if(!selectedItem) return;
-      // Tik vizualiai dingsta šiukšlė
+      // Vizualiai dingsta šiukšlė
       selectedItem.remove();
-      // Patikrinam ar teisinga
       if(selectedItem.dataset.type===bin.type){
         correct++;
       } else {
