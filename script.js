@@ -42,6 +42,8 @@ function generateLevel(level){
 function startGame(level){
   document.getElementById("start-screen").classList.add("hidden");
   document.getElementById("game").classList.remove("hidden");
+  document.getElementById("result").classList.add("hidden");
+
   document.getElementById("level-title").textContent = `Lygis: ${level.charAt(0).toUpperCase()+level.slice(1)}`;
 
   const trashArea = document.getElementById("trash");
@@ -51,6 +53,7 @@ function startGame(level){
   correct = 0;
   total = 0;
   mistakes = [];
+  selectedItem = null;
 
   const trashItems = generateLevel(level);
   total = trashItems.length;
@@ -93,22 +96,19 @@ function finishGame(){
   document.getElementById("result").classList.remove("hidden");
 
   let feedbackText = `Teisingai: ${correct} iš ${total} šiukšlių.\n`;
-  if(mistakes.length > 0){
-    feedbackText += "Klaidos:\n" + mistakes.join("\n");
-  } else {
-    feedbackText += "Puikiai! Nėra klaidų!";
-  }
-
+  feedbackText += mistakes.length > 0 ? "Klaidos:\n" + mistakes.join("\n") : "Puikiai! Nėra klaidų!";
   document.getElementById("score").textContent = feedbackText;
 }
 
 function resetGame(){
   document.getElementById("result").classList.add("hidden");
   document.getElementById("start-screen").classList.remove("hidden");
+
   document.getElementById("trash").innerHTML = "";
   document.getElementById("bins").innerHTML = "";
-  selectedItem=null;
-  correct=0;
-  total=0;
-  mistakes=[];
+
+  selectedItem = null;
+  correct = 0;
+  total = 0;
+  mistakes = [];
 }
