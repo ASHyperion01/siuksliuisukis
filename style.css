@@ -1,8 +1,8 @@
 :root {
   --green: #2ecc71;
   --dark: #1e8449;
+  --dark-green-menu: #145a32; /* dark green meniu kortelė */
   --bg: #e6f7ef;
-  --menu-bg: rgba(0,80,0,0.8); /* tamsiai žalias langelis */
   --trash-bg: #ffffff;
   --bin-bg: #ffffff;
   --error-color: #e74c3c;
@@ -25,37 +25,44 @@ body {
   display:flex; justify-content:center; align-items:center;
 }
 .menu-overlay {
-  background: var(--menu-bg);
-  padding: 30px 40px;
-  border-radius: 20px;
-  box-shadow: 0 8px 20px rgba(0,0,0,0.5);
+  background: var(--dark-green-menu);
+  padding: 40px 50px;
+  border-radius: 25px;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.5);
   color: white;
-  min-width: 250px;
+  min-width: 260px;
+  text-align: center;
+  animation: fadeIn 1s ease;
 }
-.menu-overlay h1 { margin: 0 0 10px 0; }
+@keyframes fadeIn {
+  0% { opacity: 0; transform: scale(0.95);}
+  100% { opacity: 1; transform: scale(1);}
+}
+.menu-overlay h1 { margin: 0 0 10px 0; font-size: 28px; }
 .menu-overlay p { margin: 0 0 20px 0; font-size: 18px; }
 
 /* Lygio mygtukai */
 .level-cards {
   display: flex;
   flex-direction: column;
-  gap: 12px;
+  gap: 14px;
   align-items: center;
 }
 .level-card {
-  background: var(--dark);
-  color: white;
+  background: rgba(0,100,0,0.8);
+  color: #fff;
   font-size: 16px;
   font-weight: bold;
-  padding: 8px 0;
-  width: 140px;
-  border-radius: 10px;
-  box-shadow: 0 3px 7px rgba(0,0,0,0.3);
+  padding: 10px 0;
+  width: 160px;
+  border-radius: 12px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+  transition: all 0.3s ease;
 }
 .level-card:hover {
   background: var(--green);
-  transform: translateY(-2px);
-  box-shadow: 0 5px 15px rgba(0,0,0,0.4);
+  transform: translateY(-3px) scale(1.05);
+  box-shadow: 0 6px 15px rgba(0,0,0,0.4);
 }
 
 /* Žaidimo zona */
@@ -67,7 +74,7 @@ body {
   grid-template-columns: repeat(auto-fit, minmax(60px, 1fr));
   gap: 10px;
   justify-items: center;
-  padding: 5px;
+  padding: 10px;
   background: rgba(0,120,0,0.1);
   border-radius: 15px;
   margin-bottom: 15px;
@@ -85,7 +92,7 @@ body {
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  transition: all 0.2s;
+  transition: all 0.2s ease;
 }
 .trash-item:hover { transform: scale(1.15); border-color: var(--dark); }
 .trash-item.selected { background: var(--green); color: #fff; border-color: var(--dark); }
@@ -110,7 +117,7 @@ body {
   justify-content: center;
   cursor: pointer;
   font-size: 14px;
-  transition: all 0.2s;
+  transition: all 0.2s ease;
 }
 .bin:hover { background: var(--green); border-color: var(--dark); transform: scale(1.05); }
 .bin.error { animation: shake 0.3s; border-color: var(--error-color); }
@@ -125,22 +132,24 @@ body {
 /* Baigti žaidimą mygtukas */
 button.finish {
   margin-top: 10px;
-  padding: 8px 20px;
-  font-size: 15px;
-  border-radius: 10px;
+  padding: 10px 25px;
+  font-size: 16px;
+  border-radius: 12px;
   background: var(--green);
   color: white;
+  transition: all 0.3s ease;
 }
-button.finish:hover { background: var(--dark); }
+button.finish:hover { background: var(--dark); transform: scale(1.05); }
 
 /* Rezultato ekranas */
 #result { margin-top: 20px; }
-#result button { font-size: 16px; padding: 8px 20px; }
+#result button { font-size: 16px; padding: 10px 25px; transition: all 0.3s ease; }
+#result button:hover { transform: scale(1.05); background: var(--green); color: white; }
 
 /* Mobile */
 @media (max-width:500px){
-  .menu-overlay{padding:20px;}
-  .level-card{width:120px;font-size:14px;}
+  .menu-overlay{padding:25px;}
+  .level-card{width:140px;font-size:14px;}
   .trash-item{width:50px;height:50px;font-size:28px;}
   .bin{width:80px;height:80px;font-size:12px;}
 }
