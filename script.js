@@ -1,114 +1,116 @@
-let selectedItem = null;
-let correct = 0;
-let total = 0;
-let mistakes = [];
+document.addEventListener("DOMContentLoaded", () => {
+  let selectedItem = null;
+  let correct = 0;
+  let total = 0;
+  let mistakes = [];
 
-const trashPool = {
-  plastic:["🥤","🧴","🛍️","🍶","🧃","🪥","🧼","🥡","🍼","🧋","🪣"],
-  paper:["📄","📦","📰","📃","📘","📙","📗","📕","📒","✉️","🗞️"],
-  organic:["🍌","🍎","🥕","🍞","🍕","🥬","🍉","🍇","🍓","🥔","🥑","🍆"],
-  metal:["🥫","🪙","🔩","⚙️","🔧","🗝️","🛠️","🔗"],
-  glass:["🍾","🥛","🍷","🍸","🫙","🥂","🧪"],
-  electronics:["📱","🔋","💡","🖥️","⌨️","🖱️","🎧","📀","📷","📺","🔌"]
-};
+  const trashPool = {
+    plastic:["🥤","🧴","🛍️","🍶","🧃","🪥","🧼","🥡","🍼","🧋","🪣"],
+    paper:["📄","📦","📰","📃","📘","📙","📗","📕","📒","✉️","🗞️"],
+    organic:["🍌","🍎","🥕","🍞","🍕","🥬","🍉","🍇","🍓","🥔","🥑","🍆"],
+    metal:["🥫","🪙","🔩","⚙️","🔧","🗝️","🛠️","🔗"],
+    glass:["🍾","🥛","🍷","🍸","🫙","🥂","🧪"],
+    electronics:["📱","🔋","💡","🖥️","⌨️","🖱️","🎧","📀","📷","📺","🔌"]
+  };
 
-const levelConfig = {
-  easy:{plastic:5,paper:5,organic:5,metal:3},
-  medium:{plastic:6,paper:6,organic:6,metal:4,glass:4},
-  hard:{plastic:7,paper:7,organic:7,metal:5,glass:5,electronics:6}
-};
+  const levelConfig = {
+    easy:{plastic:5,paper:5,organic:5,metal:3},
+    medium:{plastic:6,paper:6,organic:6,metal:4,glass:4},
+    hard:{plastic:7,paper:7,organic:7,metal:5,glass:5,electronics:6}
+  };
 
-const bins = [
-  {name:"Plastikas",type:"plastic"},
-  {name:"Popierius",type:"paper"},
-  {name:"Organinės",type:"organic"},
-  {name:"Metalas",type:"metal"},
-  {name:"Stiklas",type:"glass"},
-  {name:"Elektronika",type:"electronics"}
-];
+  const bins = [
+    {name:"Plastikas",type:"plastic"},
+    {name:"Popierius",type:"paper"},
+    {name:"Organinės",type:"organic"},
+    {name:"Metalas",type:"metal"},
+    {name:"Stiklas",type:"glass"},
+    {name:"Elektronika",type:"electronics"}
+  ];
 
-function shuffle(array){ return array.sort(()=>Math.random()-0.5); }
+  function shuffle(array){ return array.sort(()=>Math.random()-0.5); }
 
-function generateLevel(level){
-  let items=[];
-  for(let type in levelConfig[level]){
-    const count=levelConfig[level][type];
-    const shuffled=shuffle([...trashPool[type]]);
-    shuffled.slice(0,count).forEach(icon=>{ items.push({icon,type}); });
+  function generateLevel(level){
+    let items=[];
+    for(let type in levelConfig[level]){
+      const count=levelConfig[level][type];
+      const shuffled=shuffle([...trashPool[type]]);
+      shuffled.slice(0,count).forEach(icon=>{ items.push({icon,type}); });
+    }
+    return shuffle(items);
   }
-  return shuffle(items);
-}
 
-function startGame(level){
-  document.getElementById("start-screen").classList.remove("active");
-  document.getElementById("game").classList.add("active");
-  document.getElementById("result").classList.remove("active");
+  window.startGame = function(level){
+    document.getElementById("start-screen").classList.remove("active");
+    document.getElementById("game").classList.add("active");
+    document.getElementById("result").classList.remove("active");
 
-  document.getElementById("level-title").textContent = `Lygis: ${level.charAt(0).toUpperCase()+level.slice(1)}`;
+    document.getElementById("level-title").textContent = `Lygis: ${level.charAt(0).toUpperCase()+level.slice(1)}`;
 
-  const trashArea = document.getElementById("trash");
-  const binsArea = document.getElementById("bins");
-  trashArea.innerHTML = "";
-  binsArea.innerHTML = "";
-  correct = 0;
-  total = 0;
-  mistakes = [];
-  selectedItem = null;
+    const trashArea = document.getElementById("trash");
+    const binsArea = document.getElementById("bins");
+    trashArea.innerHTML = "";
+    binsArea.innerHTML = "";
+    correct = 0;
+    total = 0;
+    mistakes = [];
+    selectedItem = null;
 
-  const trashItems = generateLevel(level);
-  total = trashItems.length;
+    const trashItems = generateLevel(level);
+    total = trashItems.length;
 
-  trashItems.forEach(item=>{
-    const div = document.createElement("div");
-    div.className = "trash-item";
-    div.textContent = item.icon;
-    div.dataset.type = item.type;
-    div.onclick = () => {
-      if(selectedItem) selectedItem.classList.remove("selected");
-      selectedItem = div;
-      div.classList.add("selected");
-    };
-    trashArea.appendChild(div);
-  });
+    trashItems.forEach(item=>{
+      const div = document.createElement("div");
+      div.className = "trash-item";
+      div.textContent = item.icon;
+      div.dataset.type = item.type;
+      div.onclick = () => {
+        if(selectedItem) selectedItem.classList.remove("selected");
+        selectedItem = div;
+        div.classList.add("selected");
+      };
+      trashArea.appendChild(div);
+    });
 
-  bins.forEach(bin=>{
-    const div = document.createElement("div");
-    div.className = "bin";
-    div.textContent = bin.name;
-    div.onclick = () => {
-      if(!selectedItem) return;
-      if(selectedItem.dataset.type === bin.type){
-        correct++;
-      } else {
-        mistakes.push(`${selectedItem.textContent} neteisingai įdėta į "${bin.name}"`);
-        div.classList.add("error");
-        setTimeout(()=>div.classList.remove("error"),400);
-      }
-      selectedItem.remove();
-      selectedItem = null;
-    };
-    binsArea.appendChild(div);
-  });
-}
+    bins.forEach(bin=>{
+      const div = document.createElement("div");
+      div.className = "bin";
+      div.textContent = bin.name;
+      div.onclick = () => {
+        if(!selectedItem) return;
+        if(selectedItem.dataset.type === bin.type){
+          correct++;
+        } else {
+          mistakes.push(`${selectedItem.textContent} neteisingai įdėta į "${bin.name}"`);
+          div.classList.add("error");
+          setTimeout(()=>div.classList.remove("error"),400);
+        }
+        selectedItem.remove();
+        selectedItem = null;
+      };
+      binsArea.appendChild(div);
+    });
+  }
 
-function finishGame(){
-  document.getElementById("game").classList.remove("active");
-  document.getElementById("result").classList.add("active");
+  window.finishGame = function(){
+    document.getElementById("game").classList.remove("active");
+    document.getElementById("result").classList.add("active");
 
-  let feedbackText = `Teisingai: ${correct} iš ${total} šiukšlių.\n`;
-  feedbackText += mistakes.length > 0 ? "Klaidos:\n" + mistakes.join("\n") : "Puikiai! Nėra klaidų!";
-  document.getElementById("score").textContent = feedbackText;
-}
+    let feedbackText = `Teisingai: ${correct} iš ${total} šiukšlių.\n`;
+    feedbackText += mistakes.length > 0 ? "Klaidos:\n" + mistakes.join("\n") : "Puikiai! Nėra klaidų!";
+    document.getElementById("score").textContent = feedbackText;
+  }
 
-function resetGame(){
-  document.getElementById("result").classList.remove("active");
-  document.getElementById("start-screen").classList.add("active");
+  window.resetGame = function(){
+    document.getElementById("result").classList.remove("active");
+    document.getElementById("start-screen").classList.add("active");
 
-  document.getElementById("trash").innerHTML = "";
-  document.getElementById("bins").innerHTML = "";
+    document.getElementById("trash").innerHTML = "";
+    document.getElementById("bins").innerHTML = "";
 
-  selectedItem = null;
-  correct = 0;
-  total = 0;
-  mistakes = [];
-}
+    selectedItem = null;
+    correct = 0;
+    total = 0;
+    mistakes = [];
+  }
+});
