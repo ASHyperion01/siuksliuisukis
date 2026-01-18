@@ -12,16 +12,16 @@
   <h1>🌿 Šiukšlių iššūkis</h1>
   <p>Pasirink lygį</p>
   <div class="level-cards">
-    <div class="level-card" onclick="startGame('easy')">Lengvas</div>
-    <div class="level-card" onclick="startGame('medium')">Vidutinis</div>
-    <div class="level-card" onclick="startGame('hard')">Sunkus</div>
+    <button class="level-card" onclick="startGame('easy')">Lengvas</button>
+    <button class="level-card" onclick="startGame('medium')">Vidutinis</button>
+    <button class="level-card" onclick="startGame('hard')">Sunkus</button>
   </div>
 </div>
 
 <div id="game" class="hidden">
   <h2 id="level-title"></h2>
-  <div id="trash"></div>
-  <div id="bins"></div>
+  <div id="trash" class="items-grid"></div>
+  <div id="bins" class="items-grid"></div>
   <button class="finish" onclick="finishGame()">Baigti žaidimą</button>
 </div>
 
