@@ -4,6 +4,7 @@
   --bg: #e6f7ef;
   --card-bg: #a3e4d7;
   --card-hover: #2ecc71;
+  --trash-bg: #ffffff;
 }
 
 body {
@@ -11,13 +12,13 @@ body {
   font-family: 'Arial', sans-serif;
   background: var(--bg);
   text-align: center;
-  padding: 15px;
+  padding: 20px;
 }
 
 /* Titulai */
 h1 {
   color: var(--dark);
-  margin-bottom: 10px;
+  margin-bottom: 5px;
 }
 
 p {
@@ -27,19 +28,9 @@ p {
 
 /* Bendri mygtukai */
 button {
-  background: var(--green);
-  color: white;
   border: none;
-  padding: 12px 20px;
-  margin: 6px;
-  border-radius: 10px;
-  font-size: 16px;
   cursor: pointer;
-  transition: all 0.2s;
-}
-
-button:hover {
-  background: var(--dark);
+  transition: all 0.3s;
 }
 
 /* Slėpti elementai */
@@ -47,32 +38,57 @@ button:hover {
   display: none;
 }
 
-/* Žaidimo konteineriai */
-#trash, #bins {
+/* Starto ekranas – lygio mygtukai */
+.level-cards {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  margin-top: 30px;
+}
+
+.level-card {
+  background: var(--card-bg);
+  color: var(--dark);
+  font-size: 22px;
+  font-weight: bold;
+  padding: 15px 0;
+  border-radius: 15px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+}
+
+.level-card:hover {
+  background: var(--card-hover);
+  color: #fff;
+  transform: translateY(-5px);
+  box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+}
+
+/* Žaidimo zona */
+.items-grid {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  margin: 15px 0;
+  gap: 15px;
+  margin: 20px 0;
 }
 
-/* Šiukšlės */
+/* Šiukšlės mygtukai */
 .trash-item {
   width: 80px;
   height: 80px;
-  margin: 10px;
-  border-radius: 12px;
-  background: white;
+  border-radius: 15px;
+  background: var(--trash-bg);
   border: 3px solid var(--green);
+  font-size: 40px;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 40px;
   cursor: pointer;
-  transition: all 0.2s;
+  transition: transform 0.2s, border-color 0.2s, background 0.2s, color 0.2s;
 }
 
 .trash-item:hover {
-  transform: scale(1.1);
+  transform: scale(1.2);
   border-color: var(--dark);
 }
 
@@ -86,15 +102,15 @@ button:hover {
 .bin {
   width: 140px;
   height: 140px;
-  margin: 10px;
-  border-radius: 15px;
-  background: white;
+  border-radius: 20px;
+  background: var(--trash-bg);
   border: 3px dashed var(--dark);
+  font-weight: bold;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-weight: bold;
   cursor: pointer;
+  font-size: 16px;
   transition: all 0.2s;
 }
 
@@ -102,38 +118,6 @@ button:hover {
   background: var(--card-bg);
   border-color: var(--green);
   transform: scale(1.05);
-}
-
-/* Lygio kortelės startui */
-.level-cards {
-  display: flex;
-  flex-direction: column; /* vienas po kito */
-  align-items: center;
-  gap: 20px;
-  margin-top: 20px;
-}
-
-.level-card {
-  width: 220px;
-  height: 70px;
-  background: var(--card-bg);
-  border-radius: 15px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 22px;
-  font-weight: bold;
-  color: var(--dark);
-  cursor: pointer;
-  transition: all 0.3s;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.2);
-}
-
-.level-card:hover {
-  background: var(--card-hover);
-  color: white;
-  transform: translateY(-5px);
-  box-shadow: 0 8px 20px rgba(0,0,0,0.3);
 }
 
 /* Rezultato ekranas */
@@ -146,20 +130,10 @@ button:hover {
   padding: 10px 25px;
 }
 
-/* Animacijos (papildoma vizualizacija) */
-.trash-item {
-  transition: transform 0.2s, border-color 0.2s, background 0.2s, color 0.2s;
-}
-
-.bin {
-  transition: transform 0.2s, background 0.2s, border-color 0.2s;
-}
-
-/* Mobilus responsive */
+/* Mobile responsive */
 @media (max-width: 500px) {
   .level-card {
     width: 180px;
-    height: 60px;
     font-size: 18px;
   }
   .trash-item {
