@@ -14,9 +14,9 @@
     <h1>🌿 Šiukšlių iššūkis</h1>
     <p>Pasirink lygį</p>
     <div class="level-cards">
-      <button class="level-card" onclick="startGame('easy')">Lengvas</button>
-      <button class="level-card" onclick="startGame('medium')">Vidutinis</button>
-      <button class="level-card" onclick="startGame('hard')">Sunkus</button>
+      <button type="button" class="level-card" onclick="startGame('easy')">Lengvas</button>
+      <button type="button" class="level-card" onclick="startGame('medium')">Vidutinis</button>
+      <button type="button" class="level-card" onclick="startGame('hard')">Sunkus</button>
     </div>
   </div>
 </div>
@@ -26,7 +26,7 @@
   <h2 id="level-title"></h2>
   <div id="trash" class="trash-grid"></div>
   <div id="bins" class="bin-grid"></div>
-  <button class="finish" onclick="finishGame()">Baigti žaidimą</button>
+  <button type="button" class="finish" onclick="finishGame()">Baigti žaidimą</button>
 </div>
 
 <!-- Rezultato overlay -->
@@ -34,7 +34,7 @@
   <div class="result-overlay">
     <h2>Rezultatas 🎉</h2>
     <pre id="score"></pre>
-    <button onclick="resetGame()">Žaisti dar kartą</button>
+    <button type="button" onclick="resetGame()">Žaisti dar kartą</button>
   </div>
 </div>
 
