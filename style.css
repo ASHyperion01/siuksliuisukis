@@ -1,7 +1,7 @@
 :root {
   --green: #2ecc71;
-  --dark: #1e8449;
-  --dark-green-menu: #145a32;
+  --dark: #145a32;
+  --dark-green-menu: #1e8449;
   --trash-bg: #ffffff;
   --bin-bg: #ffffff;
   --error-color: #e74c3c;
@@ -9,14 +9,14 @@
 
 body {
   margin: 0;
-  font-family: 'Arial', sans-serif;
-  background: url('https://images.pexels.com/photos/122429/leaf-nature-green-spring-122429.jpeg') no-repeat center center fixed;
-  background-size: cover;
+  font-family: Arial, sans-serif;
+  background: var(--dark-green-menu); /* tamsiai žalias fonas */
   text-align: center;
   padding: 20px;
+  color: #fff;
 }
 
-/* Starto ekranas overlay */
+/* Starto ekranas */
 #start-screen {
   position: fixed;
   top:0; left:0;
@@ -24,21 +24,13 @@ body {
   display:flex; justify-content:center; align-items:center;
 }
 .menu-overlay {
-  background: var(--dark-green-menu);
+  background: var(--dark);
   padding: 40px 50px;
   border-radius: 25px;
   box-shadow: 0 10px 25px rgba(0,0,0,0.5);
-  color: white;
   min-width: 260px;
   text-align: center;
-  animation: fadeIn 1s ease;
 }
-@keyframes fadeIn {
-  0% { opacity: 0; transform: scale(0.95);}
-  100% { opacity: 1; transform: scale(1);}
-}
-.menu-overlay h1 { margin: 0 0 10px 0; font-size: 28px; }
-.menu-overlay p { margin: 0 0 20px 0; font-size: 18px; }
 
 /* Lygio mygtukai */
 .level-cards {
@@ -48,33 +40,31 @@ body {
   align-items: center;
 }
 .level-card {
-  background: rgba(0,100,0,0.8);
+  background: var(--green);
   color: #fff;
   font-size: 16px;
   font-weight: bold;
   padding: 10px 0;
   width: 160px;
   border-radius: 12px;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.3);
   transition: all 0.3s ease;
 }
 .level-card:hover {
-  background: var(--green);
-  transform: translateY(-3px) scale(1.05);
-  box-shadow: 0 6px 15px rgba(0,0,0,0.4);
+  background: #27ae60;
+  transform: scale(1.05);
 }
 
 /* Žaidimo zona */
 #game { margin-top: 20px; }
 .trash-grid {
-  max-height: 300px;
+  max-height: 250px; /* scrollable langas */
   overflow-y: auto;
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(60px, 1fr));
   gap: 10px;
   justify-items: center;
   padding: 10px;
-  background: rgba(0,120,0,0.1);
+  background: rgba(0,0,0,0.2);
   border-radius: 15px;
   margin-bottom: 15px;
 }
@@ -118,7 +108,7 @@ body {
   font-size: 14px;
   transition: all 0.2s ease;
 }
-.bin:hover { background: var(--green); border-color: var(--dark); transform: scale(1.05); }
+.bin:hover { background: var(--green); transform: scale(1.05); }
 .bin.error { animation: shake 0.3s; border-color: var(--error-color); }
 @keyframes shake {
   0%{transform:translateX(0);}
@@ -138,10 +128,10 @@ button.finish {
   color: white;
   transition: all 0.3s ease;
 }
-button.finish:hover { background: var(--dark); transform: scale(1.05); }
+button.finish:hover { background: #27ae60; transform: scale(1.05); }
 
 /* Rezultato ekranas */
-#result { margin-top: 20px; white-space: pre-line; }
+#result { margin-top: 20px; white-space: pre-line; color: #fff; }
 #result button { font-size: 16px; padding: 10px 25px; transition: all 0.3s ease; }
 #result button:hover { transform: scale(1.05); background: var(--green); color: white; }
 
