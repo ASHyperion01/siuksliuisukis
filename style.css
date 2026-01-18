@@ -3,7 +3,8 @@
   --dark: #145a32;
   --dark-green-menu: #145a32;
   --trash-bg: #ffffff;
-  --bin-bg: #ffffff;
+  --bin-bg: #27ae60;
+  --bin-text: #ffffff;
   --error-color: #e74c3c;
 }
 
@@ -67,12 +68,12 @@ body {
   width: 100%;
 }
 
-/* Šiukšlių langas */
+/* Šiukšlių langas - 3 stulpeliai */
 .trash-grid {
-  max-height: 250px;
+  max-height: 300px;
   overflow-y: auto;
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(60px, 1fr));
+  grid-template-columns: repeat(3, 1fr);
   gap: 10px;
   justify-items: center;
   padding: 10px;
@@ -94,7 +95,8 @@ body {
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  transition: all 0.2s ease;
+  transition: all 0.3s ease;
+  position: relative;
 }
 .trash-item:hover { transform: scale(1.15); border-color: var(--dark); }
 .trash-item.selected { background: var(--green); color: #fff; border-color: var(--dark); }
@@ -102,7 +104,7 @@ body {
 /* Konteineriai */
 .bin-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+  grid-template-columns: repeat(3, 1fr);
   justify-items: center;
   gap: 12px;
   margin: 10px 0;
@@ -112,16 +114,16 @@ body {
   height: 100px;
   border-radius: 15px;
   background: var(--bin-bg);
-  border: 2px dashed var(--dark);
+  color: var(--bin-text);
   font-weight: bold;
   display: flex;
   align-items: center;
   justify-content: center;
   cursor: pointer;
   font-size: 14px;
-  transition: all 0.2s ease;
+  transition: all 0.3s ease;
 }
-.bin:hover { background: var(--green); transform: scale(1.05); }
+.bin:hover { transform: scale(1.05); }
 .bin.error { animation: shake 0.3s; border-color: var(--error-color); }
 @keyframes shake {
   0%{transform:translateX(0);}
@@ -161,6 +163,13 @@ button.finish:hover { background: #27ae60; transform: scale(1.05); }
   transition: all 0.3s ease;
 }
 #result button:hover { transform: scale(1.05); background: var(--green); color: white; }
+
+/* Animacija šiukšlei įkrentant */
+@keyframes drop {
+  0% { transform: translateY(-50px); opacity:0; }
+  100% { transform: translateY(0); opacity:1; }
+}
+.trash-item.drop { animation: drop 0.3s ease; }
 
 /* Mobile */
 @media (max-width:500px){
