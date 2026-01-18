@@ -18,7 +18,7 @@ body {
   min-height: 100vh;
 }
 
-/* Ekranų bendras stilius */
+/* Bendras ekranų stilius */
 .screen {
   display: none;
   width: 100%;
@@ -51,7 +51,7 @@ body {
   color: #fff;
   font-size: 16px;
   font-weight: bold;
-  padding: 10px 0;
+  padding: 12px 0;
   width: 160px;
   border-radius: 12px;
   cursor: pointer;
@@ -68,7 +68,7 @@ body {
   width: 100%;
 }
 
-/* Šiukšlių langas - 3 stulpeliai */
+/* Šiukšlių langas */
 .trash-grid {
   max-height: 300px;
   overflow-y: auto;
@@ -146,25 +146,28 @@ button.finish {
 }
 button.finish:hover { background: #27ae60; transform: scale(1.05); }
 
-/* Rezultato ekranas */
+/* Rezultato overlay */
 #result {
-  background: rgba(0,0,0,0.3);
-  padding: 20px;
-  border-radius: 15px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 10px;
+  position: fixed;
+  top:0; left:0;
+  width:100%;
+  height:100%;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  background: rgba(0,0,0,0.7);
+  z-index: 10;
 }
-#result button {
-  font-size: 16px;
-  padding: 10px 25px;
-  cursor: pointer;
-  transition: all 0.3s ease;
+.result-overlay {
+  background: var(--dark);
+  padding: 30px 40px;
+  border-radius: 20px;
+  text-align: center;
+  color: #fff;
+  min-width: 300px;
 }
-#result button:hover { transform: scale(1.05); background: var(--green); color: white; }
 
-/* Animacija šiukšlei įkrentant */
+/* Animacija drop */
 @keyframes drop {
   0% { transform: translateY(-50px); opacity:0; }
   100% { transform: translateY(0); opacity:1; }
