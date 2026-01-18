@@ -8,16 +8,20 @@
 </head>
 <body>
 
+<!-- Starto ekranas su wallpaper ir tamsiai žaliu langeliu -->
 <div id="start-screen">
-  <h1>🌿 Šiukšlių iššūkis</h1>
-  <p>Pasirink lygį</p>
-  <div class="level-cards">
-    <button class="level-card" onclick="startGame('easy')">Lengvas</button>
-    <button class="level-card" onclick="startGame('medium')">Vidutinis</button>
-    <button class="level-card" onclick="startGame('hard')">Sunkus</button>
+  <div class="menu-overlay">
+    <h1>🌿 Šiukšlių iššūkis</h1>
+    <p>Pasirink lygį</p>
+    <div class="level-cards">
+      <button class="level-card" onclick="startGame('easy')">Lengvas</button>
+      <button class="level-card" onclick="startGame('medium')">Vidutinis</button>
+      <button class="level-card" onclick="startGame('hard')">Sunkus</button>
+    </div>
   </div>
 </div>
 
+<!-- Žaidimo zona -->
 <div id="game" class="hidden">
   <h2 id="level-title"></h2>
   <div id="trash" class="trash-grid"></div>
@@ -25,6 +29,7 @@
   <button class="finish" onclick="finishGame()">Baigti žaidimą</button>
 </div>
 
+<!-- Rezultato ekranas -->
 <div id="result" class="hidden">
   <h2>Rezultatas 🎉</h2>
   <p id="score"></p>
