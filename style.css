@@ -3,8 +3,10 @@
   --dark: #1e8449;
   --bg: #e6f7ef;
   --card-bg: #a3e4d7;
-  --card-hover: #2ecc71;
+  --card-hover: #27ae60;
   --trash-bg: #ffffff;
+  --bin-bg: #ffffff;
+  --error-color: #e74c3c;
 }
 
 body {
@@ -20,7 +22,6 @@ h1 {
   color: var(--dark);
   margin-bottom: 5px;
 }
-
 p {
   font-size: 18px;
   color: var(--dark);
@@ -44,6 +45,7 @@ button {
   flex-direction: column;
   gap: 20px;
   margin-top: 30px;
+  align-items: center;
 }
 
 .level-card {
@@ -52,10 +54,10 @@ button {
   font-size: 22px;
   font-weight: bold;
   padding: 15px 0;
+  width: 220px;
   border-radius: 15px;
   box-shadow: 0 4px 10px rgba(0,0,0,0.2);
 }
-
 .level-card:hover {
   background: var(--card-hover);
   color: #fff;
@@ -63,11 +65,11 @@ button {
   box-shadow: 0 8px 20px rgba(0,0,0,0.3);
 }
 
-/* Žaidimo zona */
-.items-grid {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
+/* Žaidimo zona – grid išdėstymas */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(80px, 1fr));
+  justify-items: center;
   gap: 15px;
   margin: 20px 0;
 }
@@ -86,24 +88,22 @@ button {
   cursor: pointer;
   transition: transform 0.2s, border-color 0.2s, background 0.2s, color 0.2s;
 }
-
 .trash-item:hover {
   transform: scale(1.2);
   border-color: var(--dark);
 }
-
 .trash-item.selected {
   background: var(--green);
   color: white;
   border-color: var(--dark);
 }
 
-/* Konteineriai (šiukšlių konteineriai) */
+/* Konteineriai */
 .bin {
-  width: 140px;
-  height: 140px;
+  width: 120px;
+  height: 120px;
   border-radius: 20px;
-  background: var(--trash-bg);
+  background: var(--bin-bg);
   border: 3px dashed var(--dark);
   font-weight: bold;
   display: flex;
@@ -113,18 +113,31 @@ button {
   font-size: 16px;
   transition: all 0.2s;
 }
-
 .bin:hover {
   background: var(--card-bg);
   border-color: var(--green);
   transform: scale(1.05);
 }
 
+/* Neteisingas konteineris flash */
+.bin.error {
+  animation: shake 0.3s;
+  border-color: var(--error-color);
+}
+
+/* Animacijos */
+@keyframes shake {
+  0% { transform: translateX(0px); }
+  25% { transform: translateX(-5px); }
+  50% { transform: translateX(5px); }
+  75% { transform: translateX(-5px); }
+  100% { transform: translateX(0px); }
+}
+
 /* Rezultato ekranas */
 #result {
   margin-top: 20px;
 }
-
 #result button {
   font-size: 18px;
   padding: 10px 25px;
@@ -142,7 +155,7 @@ button {
     font-size: 32px;
   }
   .bin {
-    width: 110px;
-    height: 110px;
+    width: 100px;
+    height: 100px;
   }
 }
