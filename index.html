@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="lt">
+<head>
+  <meta charset="UTF-8">
+  <title>Šiukšlių iššūkis</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<h1>Šiukšlių iššūkis</h1>
+
+<!-- Lygio pasirinkimas -->
+<div id="level-select">
+  <p>Pasirink lygį:</p>
+  <button onclick="startGame('lengvas')">Lengvas</button>
+  <button onclick="startGame('vidutinis')">Vidutinis</button>
+  <button onclick="startGame('sunkus')">Sunkus</button>
+</div>
+
+<!-- Žaidimo zona -->
+<div id="game" class="hidden">
+  <h2 id="level-title"></h2>
+  <div id="items-container"></div>
+  <div id="bins-container"></div>
+  <button id="finish-btn" onclick="finishGame()">Baigti</button>
+</div>
+
+<!-- Rezultatas -->
+<div id="result" class="hidden">
+  <h2>Rezultatas</h2>
+  <p id="score"></p>
+  <button onclick="resetGame()">Žaisti dar kartą</button>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
