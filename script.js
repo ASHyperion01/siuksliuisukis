@@ -61,7 +61,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     trashItems.forEach(item=>{
       const div = document.createElement("div");
-      div.className = "trash-item";
+      div.className = "trash-item drop";
       div.textContent = item.icon;
       div.dataset.type = item.type;
       div.onclick = () => {
@@ -78,6 +78,17 @@ document.addEventListener("DOMContentLoaded", () => {
       div.textContent = bin.name;
       div.onclick = () => {
         if(!selectedItem) return;
+
+        // animacija: move selected šiukšlę į bin
+        selectedItem.style.transition = "transform 0.3s ease, opacity 0.3s ease";
+        const rectBin = div.getBoundingClientRect();
+        const rectTrash = selectedItem.getBoundingClientRect();
+        const dx = rectBin.left - rectTrash.left;
+        const dy = rectBin.top - rectTrash.top;
+        selectedItem.style.transform = `translate(${dx}px, ${dy}px) scale(0.3)`;
+        selectedItem.style.opacity = "0";
+        setTimeout(()=>selectedItem.remove(), 300);
+
         if(selectedItem.dataset.type === bin.type){
           correct++;
         } else {
@@ -85,7 +96,6 @@ document.addEventListener("DOMContentLoaded", () => {
           div.classList.add("error");
           setTimeout(()=>div.classList.remove("error"),400);
         }
-        selectedItem.remove();
         selectedItem = null;
       };
       binsArea.appendChild(div);
