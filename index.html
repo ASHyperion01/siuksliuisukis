@@ -3,29 +3,29 @@
 <head>
   <meta charset="UTF-8">
   <title>Šiukšlių iššūkis</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-<h1>Šiukšlių iššūkis</h1>
+<h1>🌿 Šiukšlių iššūkis</h1>
 
-<!-- Lygio pasirinkimas -->
 <div id="level-select">
-  <p>Pasirink lygį:</p>
-  <button onclick="startGame('lengvas')">Lengvas</button>
-  <button onclick="startGame('vidutinis')">Vidutinis</button>
-  <button onclick="startGame('sunkus')">Sunkus</button>
+  <p>Pasirink lygį</p>
+  <button onclick="startGame('easy')">Lengvas</button>
+  <button onclick="startGame('medium')">Vidutinis</button>
+  <button onclick="startGame('hard')">Sunkus</button>
 </div>
 
-<!-- Žaidimo zona -->
 <div id="game" class="hidden">
   <h2 id="level-title"></h2>
-  <div id="items-container"></div>
-  <div id="bins-container"></div>
-  <button id="finish-btn" onclick="finishGame()">Baigti</button>
+
+  <div id="items"></div>
+  <div id="bins"></div>
+
+  <button class="finish" onclick="finishGame()">Baigti</button>
 </div>
 
-<!-- Rezultatas -->
 <div id="result" class="hidden">
   <h2>Rezultatas</h2>
   <p id="score"></p>
