@@ -1,16 +1,15 @@
-document.addEventListener("DOMContentLoaded", () => {
+window.addEventListener("DOMContentLoaded", () => {
   let selectedItem = null;
   let correct = 0;
   let total = 0;
   let mistakes = [];
 
-  // Logiškai teisingos šiukšlės
   const trashPool = {
     plastic:["🛍️","🧴","🥡","🧋"],
     paper:["📄","📦","📰"],
     organic:["🍌","🍎","🥕","🥬","🍉","🥑","🥔"],
     metal:["🥫","🪙","🔩"],
-    glass:["🍾","🥛","🥂","🥃","🍼"], // pieno butelis, stiklas į stiklas
+    glass:["🍾","🥛","🥂","🥃","🍼"],
     electronics:["📱","💡","💻","🎧","📀"]
   };
 
@@ -34,9 +33,9 @@ document.addEventListener("DOMContentLoaded", () => {
   function generateLevel(level){
     let items=[];
     for(let type in levelConfig[level]){
-      const count=levelConfig[level][type];
-      const shuffled=shuffle([...trashPool[type]]);
-      shuffled.slice(0,count).forEach(icon=>{ items.push({icon,type}); });
+      const count = levelConfig[level][type];
+      const shuffled = shuffle([...trashPool[type]]);
+      shuffled.slice(0,count).forEach(icon => items.push({icon,type}));
     }
     return shuffle(items);
   }
@@ -60,7 +59,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const trashItems = generateLevel(level);
     total = trashItems.length;
 
-    trashItems.forEach(item=>{
+    trashItems.forEach(item => {
       const div = document.createElement("div");
       div.className = "trash-item drop";
       div.textContent = item.icon;
@@ -73,19 +72,17 @@ document.addEventListener("DOMContentLoaded", () => {
       trashArea.appendChild(div);
     });
 
-    bins.forEach(bin=>{
+    bins.forEach(bin => {
       const div = document.createElement("div");
       div.className = "bin";
       div.textContent = bin.name;
       div.onclick = () => {
         if(!selectedItem) return;
-
-        // animacija: move į bin
-        selectedItem.style.transition = "transform 0.3s ease, opacity 0.3s ease";
         const rectBin = div.getBoundingClientRect();
         const rectTrash = selectedItem.getBoundingClientRect();
         const dx = rectBin.left - rectTrash.left;
         const dy = rectBin.top - rectTrash.top;
+        selectedItem.style.transition = "transform 0.3s ease, opacity 0.3s ease";
         selectedItem.style.transform = `translate(${dx}px, ${dy}px) scale(0.3)`;
         selectedItem.style.opacity = "0";
         setTimeout(()=>selectedItem.remove(), 300);
@@ -116,8 +113,10 @@ document.addEventListener("DOMContentLoaded", () => {
     document.getElementById("result").classList.remove("active");
     document.getElementById("start-screen").classList.add("active");
 
-    document.getElementById("trash").innerHTML = "";
-    document.getElementById("bins").innerHTML = "";
+    const trashArea = document.getElementById("trash");
+    const binsArea = document.getElementById("bins");
+    trashArea.innerHTML = "";
+    binsArea.innerHTML = "";
 
     selectedItem = null;
     correct = 0;
