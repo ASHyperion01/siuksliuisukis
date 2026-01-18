@@ -29,11 +29,13 @@
   <button class="finish" onclick="finishGame()">Baigti žaidimą</button>
 </div>
 
-<!-- Rezultato ekranas -->
+<!-- Rezultato overlay -->
 <div id="result" class="screen">
-  <h2>Rezultatas 🎉</h2>
-  <pre id="score"></pre>
-  <button onclick="resetGame()">Žaisti dar kartą</button>
+  <div class="result-overlay">
+    <h2>Rezultatas 🎉</h2>
+    <pre id="score"></pre>
+    <button onclick="resetGame()">Žaisti dar kartą</button>
+  </div>
 </div>
 
 <script src="script.js"></script>
