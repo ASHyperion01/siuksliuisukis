@@ -105,6 +105,8 @@ function finishGame(){
 function resetGame(){
   document.getElementById("result").classList.add("hidden");
   document.getElementById("start-screen").classList.remove("hidden");
+  document.getElementById("trash").innerHTML = "";
+  document.getElementById("bins").innerHTML = "";
   selectedItem=null;
   correct=0;
   total=0;
