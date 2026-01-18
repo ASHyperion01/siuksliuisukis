@@ -1,64 +1,89 @@
+:root {
+  --green: #2ecc71;
+  --dark: #1e8449;
+  --bg: #f4fff7;
+}
+
 body {
-  font-family: Arial, sans-serif;
-  text-align: center;
-  background-color: #f0f8ff;
   margin: 0;
-  padding: 20px;
+  font-family: Arial, sans-serif;
+  background: var(--bg);
+  text-align: center;
+  padding: 15px;
 }
 
 h1 {
-  color: #2c3e50;
+  color: var(--dark);
 }
 
 button {
-  padding: 10px 20px;
-  margin: 5px;
+  background: var(--green);
+  color: white;
+  border: none;
+  padding: 12px 20px;
+  margin: 6px;
+  border-radius: 10px;
   font-size: 16px;
   cursor: pointer;
-  border-radius: 5px;
-  border: none;
-  background-color: #3498db;
-  color: white;
-  transition: 0.3s;
 }
 
 button:hover {
-  background-color: #2980b9;
+  background: var(--dark);
 }
 
 .hidden {
   display: none;
 }
 
-#items-container, #bins-container {
+#items, #bins {
   display: flex;
-  justify-content: center;
-  margin: 20px 0;
   flex-wrap: wrap;
-}
-
-.item {
-  font-size: 40px;
-  margin: 10px;
-  cursor: grab;
-  user-select: none;
-}
-
-.bin {
-  border: 2px dashed #555;
-  padding: 20px;
-  width: 150px;
-  height: 150px;
-  margin: 10px;
-  display: flex;
   justify-content: center;
-  align-items: center;
-  font-weight: bold;
-  background-color: #ecf0f1;
-  transition: 0.3s;
+  margin: 15px 0;
 }
 
-.bin.hovered {
-  background-color: #d1f7c4;
-  border-color: #27ae60;
+/* ŠIUKŠLĖS */
+.item {
+  width: 70px;
+  height: 70px;
+  margin: 10px;
+  border-radius: 12px;
+  background: white;
+  border: 3px solid var(--green);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.item img {
+  width: 50px;
+  height: 50px;
+}
+
+.item.selected {
+  background: var(--green);
+}
+
+/* KONTEINERIAI */
+.bin {
+  width: 120px;
+  height: 120px;
+  margin: 10px;
+  border-radius: 15px;
+  background: white;
+  border: 3px dashed var(--dark);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.bin:hover {
+  background: #d4f5e2;
+}
+
+.finish {
+  margin-top: 15px;
 }
