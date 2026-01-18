@@ -4,23 +4,45 @@ let total = 0;
 
 const levels = {
   easy: [
+    // PLASTIKAS
     { icon: "🥤", type: "plastic" },
+    { icon: "🧴", type: "plastic" },
+    { icon: "🛍️", type: "plastic" },
+
+    // POPIERIUS
     { icon: "📄", type: "paper" },
-    { icon: "🍌", type: "organic" }
+    { icon: "📦", type: "paper" },
+    { icon: "📰", type: "paper" },
+
+    // ORGANINĖS
+    { icon: "🍌", type: "organic" },
+    { icon: "🍎", type: "organic" },
+    { icon: "🥕", type: "organic" },
+
+    // METALAS (1, kad būtų labai lengva)
+    { icon: "🥫", type: "metal" }
   ],
+
   medium: [
     { icon: "🥤", type: "plastic" },
+    { icon: "🧴", type: "plastic" },
     { icon: "📄", type: "paper" },
+    { icon: "📦", type: "paper" },
     { icon: "🍌", type: "organic" },
+    { icon: "🍎", type: "organic" },
     { icon: "🥫", type: "metal" },
-    { icon: "🧴", type: "plastic" }
+    { icon: "🍾", type: "glass" }
   ],
+
   hard: [
     { icon: "🥤", type: "plastic" },
-    { icon: "📄", type: "paper" },
-    { icon: "🍌", type: "organic" },
-    { icon: "🥫", type: "metal" },
     { icon: "🧴", type: "plastic" },
+    { icon: "📄", type: "paper" },
+    { icon: "📦", type: "paper" },
+    { icon: "🍌", type: "organic" },
+    { icon: "🍎", type: "organic" },
+    { icon: "🥫", type: "metal" },
+    { icon: "🍾", type: "glass" },
     { icon: "📱", type: "electronics" },
     { icon: "🔋", type: "electronics" },
     { icon: "💡", type: "electronics" }
@@ -32,6 +54,7 @@ const bins = [
   { name: "Popierius", type: "paper" },
   { name: "Organinės", type: "organic" },
   { name: "Metalas", type: "metal" },
+  { name: "Stiklas", type: "glass" },
   { name: "Elektronika", type: "electronics" }
 ];
 
@@ -58,7 +81,9 @@ function startGame(level) {
     div.dataset.type = item.type;
 
     div.onclick = () => {
-      document.querySelectorAll(".item").forEach(i => i.classList.remove("selected"));
+      document.querySelectorAll(".item").forEach(i =>
+        i.classList.remove("selected")
+      );
       div.classList.add("selected");
       selectedItem = div;
     };
