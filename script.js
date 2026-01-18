@@ -4,20 +4,26 @@ let total = 0;
 
 const levels = {
   easy: [
-    { img: "images/plastic.png", type: "plastic" },
-    { img: "images/paper.png", type: "paper" }
+    { icon: "🥤", type: "plastic" },
+    { icon: "📄", type: "paper" },
+    { icon: "🍌", type: "organic" }
   ],
   medium: [
-    { img: "images/plastic.png", type: "plastic" },
-    { img: "images/paper.png", type: "paper" },
-    { img: "images/banana.png", type: "organic" }
+    { icon: "🥤", type: "plastic" },
+    { icon: "📄", type: "paper" },
+    { icon: "🍌", type: "organic" },
+    { icon: "🥫", type: "metal" },
+    { icon: "🧴", type: "plastic" }
   ],
   hard: [
-    { img: "images/plastic.png", type: "plastic" },
-    { img: "images/paper.png", type: "paper" },
-    { img: "images/banana.png", type: "organic" },
-    { img: "images/can.png", type: "metal" },
-    { img: "images/bottle.png", type: "plastic" }
+    { icon: "🥤", type: "plastic" },
+    { icon: "📄", type: "paper" },
+    { icon: "🍌", type: "organic" },
+    { icon: "🥫", type: "metal" },
+    { icon: "🧴", type: "plastic" },
+    { icon: "📱", type: "electronics" },
+    { icon: "🔋", type: "electronics" },
+    { icon: "💡", type: "electronics" }
   ]
 };
 
@@ -25,7 +31,8 @@ const bins = [
   { name: "Plastikas", type: "plastic" },
   { name: "Popierius", type: "paper" },
   { name: "Organinės", type: "organic" },
-  { name: "Metalas", type: "metal" }
+  { name: "Metalas", type: "metal" },
+  { name: "Elektronika", type: "electronics" }
 ];
 
 function startGame(level) {
@@ -47,12 +54,8 @@ function startGame(level) {
   levels[level].forEach(item => {
     const div = document.createElement("div");
     div.className = "item";
+    div.innerText = item.icon;
     div.dataset.type = item.type;
-
-    const img = document.createElement("img");
-    img.src = item.img;
-
-    div.appendChild(img);
 
     div.onclick = () => {
       document.querySelectorAll(".item").forEach(i => i.classList.remove("selected"));
