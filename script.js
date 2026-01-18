@@ -4,19 +4,20 @@ document.addEventListener("DOMContentLoaded", () => {
   let total = 0;
   let mistakes = [];
 
+  // Logiškai teisingos šiukšlės
   const trashPool = {
-    plastic:["🥤","🧴","🛍️","🍶","🧃","🪥","🧼","🥡","🍼","🧋","🪣"],
-    paper:["📄","📦","📰","📃","📘","📙","📗","📕","📒","✉️","🗞️"],
-    organic:["🍌","🍎","🥕","🍞","🍕","🥬","🍉","🍇","🍓","🥔","🥑","🍆"],
-    metal:["🥫","🪙","🔩","⚙️","🔧","🗝️","🛠️","🔗"],
-    glass:["🍾","🥛","🍷","🍸","🫙","🥂","🧪"],
-    electronics:["📱","🔋","💡","🖥️","⌨️","🖱️","🎧","📀","📷","📺","🔌"]
+    plastic:["🛍️","🧴","🥡","🧋"],
+    paper:["📄","📦","📰"],
+    organic:["🍌","🍎","🥕","🥬","🍉","🥑","🥔"],
+    metal:["🥫","🪙","🔩"],
+    glass:["🍾","🥛","🥂","🥃","🍼"], // pieno butelis, stiklas į stiklas
+    electronics:["📱","💡","💻","🎧","📀"]
   };
 
   const levelConfig = {
-    easy:{plastic:5,paper:5,organic:5,metal:3},
-    medium:{plastic:6,paper:6,organic:6,metal:4,glass:4},
-    hard:{plastic:7,paper:7,organic:7,metal:5,glass:5,electronics:6}
+    easy:{plastic:4,paper:3,organic:4,metal:2},
+    medium:{plastic:5,paper:4,organic:5,metal:3,glass:3},
+    hard:{plastic:6,paper:5,organic:6,metal:4,glass:4,electronics:4}
   };
 
   const bins = [
@@ -79,7 +80,7 @@ document.addEventListener("DOMContentLoaded", () => {
       div.onclick = () => {
         if(!selectedItem) return;
 
-        // animacija: move selected šiukšlę į bin
+        // animacija: move į bin
         selectedItem.style.transition = "transform 0.3s ease, opacity 0.3s ease";
         const rectBin = div.getBoundingClientRect();
         const rectTrash = selectedItem.getBoundingClientRect();
