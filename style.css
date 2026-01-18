@@ -10,10 +10,10 @@
 body {
   margin: 0;
   font-family: Arial, sans-serif;
-  background: var(--dark-green-menu); /* tamsiai žalias fonas */
+  background: var(--dark-green-menu);
+  color: #fff;
   text-align: center;
   padding: 20px;
-  color: #fff;
 }
 
 /* Starto ekranas */
@@ -48,6 +48,7 @@ body {
   width: 160px;
   border-radius: 12px;
   transition: all 0.3s ease;
+  cursor: pointer;
 }
 .level-card:hover {
   background: #27ae60;
@@ -55,9 +56,17 @@ body {
 }
 
 /* Žaidimo zona */
-#game { margin-top: 20px; }
+#game { 
+  margin-top: 20px; 
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+
+/* Šiukšlių langas */
 .trash-grid {
-  max-height: 250px; /* scrollable langas */
+  max-height: 250px;
   overflow-y: auto;
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(60px, 1fr));
@@ -66,7 +75,8 @@ body {
   padding: 10px;
   background: rgba(0,0,0,0.2);
   border-radius: 15px;
-  margin-bottom: 15px;
+  width: 100%;
+  max-width: 500px;
 }
 
 /* Šiukšlės */
@@ -127,12 +137,17 @@ button.finish {
   background: var(--green);
   color: white;
   transition: all 0.3s ease;
+  cursor: pointer;
 }
 button.finish:hover { background: #27ae60; transform: scale(1.05); }
 
 /* Rezultato ekranas */
-#result { margin-top: 20px; white-space: pre-line; color: #fff; }
-#result button { font-size: 16px; padding: 10px 25px; transition: all 0.3s ease; }
+#result { 
+  margin-top: 20px; 
+  white-space: pre-line; 
+  color: #fff;
+}
+#result button { font-size: 16px; padding: 10px 25px; transition: all 0.3s ease; cursor: pointer; }
 #result button:hover { transform: scale(1.05); background: var(--green); color: white; }
 
 /* Mobile */
