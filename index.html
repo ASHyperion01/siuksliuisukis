@@ -2,32 +2,31 @@
 <html lang="lt">
 <head>
   <meta charset="UTF-8">
-  <title>Šiukšlių iššūkis</title>
+  <title>🌿 Šiukšlių iššūkis</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-<h1>🌿 Šiukšlių iššūkis</h1>
-
-<div id="level-select">
+<div id="start-screen">
+  <h1>🌿 Šiukšlių iššūkis</h1>
   <p>Pasirink lygį</p>
-  <button onclick="startGame('easy')">Lengvas</button>
-  <button onclick="startGame('medium')">Vidutinis</button>
-  <button onclick="startGame('hard')">Sunkus</button>
+  <div class="level-cards">
+    <div class="level-card" onclick="startGame('easy')">Lengvas</div>
+    <div class="level-card" onclick="startGame('medium')">Vidutinis</div>
+    <div class="level-card" onclick="startGame('hard')">Sunkus</div>
+  </div>
 </div>
 
 <div id="game" class="hidden">
   <h2 id="level-title"></h2>
-
-  <div id="items"></div>
+  <div id="trash"></div>
   <div id="bins"></div>
-
-  <button class="finish" onclick="finishGame()">Baigti</button>
+  <button class="finish" onclick="finishGame()">Baigti žaidimą</button>
 </div>
 
 <div id="result" class="hidden">
-  <h2>Rezultatas</h2>
+  <h2>Rezultatas 🎉</h2>
   <p id="score"></p>
   <button onclick="resetGame()">Žaisti dar kartą</button>
 </div>
