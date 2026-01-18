@@ -9,7 +9,7 @@
 <body>
 
 <!-- Starto ekranas -->
-<div id="start-screen">
+<div id="start-screen" class="screen active">
   <div class="menu-overlay">
     <h1>🌿 Šiukšlių iššūkis</h1>
     <p>Pasirink lygį</p>
@@ -22,7 +22,7 @@
 </div>
 
 <!-- Žaidimo zona -->
-<div id="game" class="hidden">
+<div id="game" class="screen">
   <h2 id="level-title"></h2>
   <div id="trash" class="trash-grid"></div>
   <div id="bins" class="bin-grid"></div>
@@ -30,7 +30,7 @@
 </div>
 
 <!-- Rezultato ekranas -->
-<div id="result" class="hidden">
+<div id="result" class="screen">
   <h2>Rezultatas 🎉</h2>
   <p id="score"></p>
   <button onclick="resetGame()">Žaisti dar kartą</button>
