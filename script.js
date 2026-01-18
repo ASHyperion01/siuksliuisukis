@@ -49,7 +49,6 @@ function startGame(level) {
 
   const trashArea = document.getElementById("trash");
   const binsArea = document.getElementById("bins");
-
   trashArea.innerHTML = "";
   binsArea.innerHTML = "";
 
@@ -79,6 +78,12 @@ function startGame(level) {
       if(selectedItem.type === bin.type) {
         correct++;
         trashArea.removeChild(selectedItem.div);
+        selectedItem = null;
+      } else {
+        // neteisingas pasirinkimas
+        selectedItem.div.classList.remove("selected");
+        div.classList.add("error");
+        setTimeout(()=>div.classList.remove("error"), 400);
         selectedItem = null;
       }
     };
