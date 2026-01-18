@@ -1,7 +1,7 @@
 :root {
   --green: #2ecc71;
   --dark: #145a32;
-  --dark-green-menu: #1e8449;
+  --dark-green-menu: #145a32;
   --trash-bg: #ffffff;
   --bin-bg: #ffffff;
   --error-color: #e74c3c;
@@ -14,15 +14,23 @@ body {
   color: #fff;
   text-align: center;
   padding: 20px;
+  min-height: 100vh;
+}
+
+/* Ekranų bendras stilius */
+.screen {
+  display: none;
+  width: 100%;
+  min-height: 100vh;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+.screen.active {
+  display: flex;
 }
 
 /* Starto ekranas */
-#start-screen {
-  position: fixed;
-  top:0; left:0;
-  width:100%; height:100%;
-  display:flex; justify-content:center; align-items:center;
-}
 .menu-overlay {
   background: var(--dark);
   padding: 40px 50px;
@@ -31,8 +39,6 @@ body {
   min-width: 260px;
   text-align: center;
 }
-
-/* Lygio mygtukai */
 .level-cards {
   display: flex;
   flex-direction: column;
@@ -47,21 +53,18 @@ body {
   padding: 10px 0;
   width: 160px;
   border-radius: 12px;
-  transition: all 0.3s ease;
   cursor: pointer;
+  transition: all 0.3s ease;
 }
-.level-card:hover {
-  background: #27ae60;
-  transform: scale(1.05);
-}
+.level-card:hover { background: #27ae60; transform: scale(1.05); }
 
 /* Žaidimo zona */
-#game { 
-  margin-top: 20px; 
+#game {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 10px;
+  gap: 15px;
+  width: 100%;
 }
 
 /* Šiukšlių langas */
@@ -136,16 +139,13 @@ button.finish {
   border-radius: 12px;
   background: var(--green);
   color: white;
-  transition: all 0.3s ease;
   cursor: pointer;
+  transition: all 0.3s ease;
 }
 button.finish:hover { background: #27ae60; transform: scale(1.05); }
 
 /* Rezultato ekranas */
-#result { 
-  margin-top: 20px; 
-  white-space: pre-line; 
-  color: #fff;
+#result {
   background: rgba(0,0,0,0.3);
   padding: 20px;
   border-radius: 15px;
@@ -154,7 +154,12 @@ button.finish:hover { background: #27ae60; transform: scale(1.05); }
   align-items: center;
   gap: 10px;
 }
-#result button { font-size: 16px; padding: 10px 25px; transition: all 0.3s ease; cursor: pointer; }
+#result button {
+  font-size: 16px;
+  padding: 10px 25px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
 #result button:hover { transform: scale(1.05); background: var(--green); color: white; }
 
 /* Mobile */
