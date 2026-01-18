@@ -1,8 +1,9 @@
-let selectedItem=null;
-let correct=0;
-let total=0;
+let selectedItem = null;
+let correct = 0;
+let total = 0;
+let mistakes = [];
 
-const trashPool={
+const trashPool = {
   plastic:["🥤","🧴","🛍️","🍶","🧃","🪥","🧼","🥡","🍼","🧋","🪣"],
   paper:["📄","📦","📰","📃","📘","📙","📗","📕","📒","✉️","🗞️"],
   organic:["🍌","🍎","🥕","🍞","🍕","🥬","🍉","🍇","🍓","🥔","🥑","🍆"],
@@ -11,13 +12,13 @@ const trashPool={
   electronics:["📱","🔋","💡","🖥️","⌨️","🖱️","🎧","📀","📷","📺","🔌"]
 };
 
-const levelConfig={
+const levelConfig = {
   easy:{plastic:5,paper:5,organic:5,metal:3},
   medium:{plastic:6,paper:6,organic:6,metal:4,glass:4},
   hard:{plastic:7,paper:7,organic:7,metal:5,glass:5,electronics:6}
 };
 
-const bins=[
+const bins = [
   {name:"Plastikas",type:"plastic"},
   {name:"Popierius",type:"paper"},
   {name:"Organinės",type:"organic"},
@@ -41,46 +42,47 @@ function generateLevel(level){
 function startGame(level){
   document.getElementById("start-screen").classList.add("hidden");
   document.getElementById("game").classList.remove("hidden");
-  document.getElementById("level-title").textContent=`Lygis: ${level.charAt(0).toUpperCase()+level.slice(1)}`;
+  document.getElementById("level-title").textContent = `Lygis: ${level.charAt(0).toUpperCase()+level.slice(1)}`;
 
-  const trashArea=document.getElementById("trash");
-  const binsArea=document.getElementById("bins");
-  trashArea.innerHTML="";
-  binsArea.innerHTML="";
-  correct=0;
-  total=0;
+  const trashArea = document.getElementById("trash");
+  const binsArea = document.getElementById("bins");
+  trashArea.innerHTML = "";
+  binsArea.innerHTML = "";
+  correct = 0;
+  total = 0;
+  mistakes = [];
 
-  const trashItems=generateLevel(level);
-  total=trashItems.length;
+  const trashItems = generateLevel(level);
+  total = trashItems.length;
 
   trashItems.forEach(item=>{
-    const div=document.createElement("div");
-    div.className="trash-item";
-    div.textContent=item.icon;
-    div.dataset.type=item.type;
-    div.onclick=()=>{
+    const div = document.createElement("div");
+    div.className = "trash-item";
+    div.textContent = item.icon;
+    div.dataset.type = item.type;
+    div.onclick = () => {
       if(selectedItem) selectedItem.classList.remove("selected");
-      selectedItem=div;
+      selectedItem = div;
       div.classList.add("selected");
     };
     trashArea.appendChild(div);
   });
 
   bins.forEach(bin=>{
-    const div=document.createElement("div");
-    div.className="bin";
-    div.textContent=bin.name;
-    div.onclick=()=>{
+    const div = document.createElement("div");
+    div.className = "bin";
+    div.textContent = bin.name;
+    div.onclick = () => {
       if(!selectedItem) return;
-      // Vizualiai dingsta šiukšlė
-      selectedItem.remove();
-      if(selectedItem.dataset.type===bin.type){
+      if(selectedItem.dataset.type === bin.type){
         correct++;
       } else {
+        mistakes.push(`${selectedItem.textContent} neteisingai įdėta į "${bin.name}"`);
         div.classList.add("error");
         setTimeout(()=>div.classList.remove("error"),400);
       }
-      selectedItem=null;
+      selectedItem.remove();
+      selectedItem = null;
     };
     binsArea.appendChild(div);
   });
@@ -89,7 +91,15 @@ function startGame(level){
 function finishGame(){
   document.getElementById("game").classList.add("hidden");
   document.getElementById("result").classList.remove("hidden");
-  document.getElementById("score").textContent=`Teisingai: ${correct} iš ${total} šiukšlių`;
+
+  let feedbackText = `Teisingai: ${correct} iš ${total} šiukšlių.\n`;
+  if(mistakes.length > 0){
+    feedbackText += "Klaidos:\n" + mistakes.join("\n");
+  } else {
+    feedbackText += "Puikiai! Nėra klaidų!";
+  }
+
+  document.getElementById("score").textContent = feedbackText;
 }
 
 function resetGame(){
@@ -98,4 +108,5 @@ function resetGame(){
   selectedItem=null;
   correct=0;
   total=0;
+  mistakes=[];
 }
