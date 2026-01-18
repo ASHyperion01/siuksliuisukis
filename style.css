@@ -1,8 +1,7 @@
 :root {
   --green: #2ecc71;
   --dark: #1e8449;
-  --dark-green-menu: #145a32; /* dark green meniu kortelė */
-  --bg: #e6f7ef;
+  --dark-green-menu: #145a32;
   --trash-bg: #ffffff;
   --bin-bg: #ffffff;
   --error-color: #e74c3c;
@@ -68,7 +67,7 @@ body {
 /* Žaidimo zona */
 #game { margin-top: 20px; }
 .trash-grid {
-  max-height: 300px; /* scrollable langas */
+  max-height: 300px;
   overflow-y: auto;
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(60px, 1fr));
@@ -142,7 +141,7 @@ button.finish {
 button.finish:hover { background: var(--dark); transform: scale(1.05); }
 
 /* Rezultato ekranas */
-#result { margin-top: 20px; }
+#result { margin-top: 20px; white-space: pre-line; }
 #result button { font-size: 16px; padding: 10px 25px; transition: all 0.3s ease; }
 #result button:hover { transform: scale(1.05); background: var(--green); color: white; }
 
