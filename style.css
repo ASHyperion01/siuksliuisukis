@@ -126,20 +126,20 @@ body{
   border-radius:20px;
 }
 
-/* COMMAND BOX – SLAPTAS */
+/* MOVABLE COMMAND BOX */
 #command-box{
   position:fixed;
-  bottom:20px;
-  left:50%;
-  transform:translateX(-50%);
-  background:rgba(0,0,0,0.85);
+  top:100px;
+  left:50px;
+  background:rgba(0,0,0,0.9);
   padding:10px 12px;
   border-radius:10px;
   display:flex;
   flex-direction:column;
   align-items:center;
-  min-width:200px;
-  z-index:100;
+  min-width:220px;
+  cursor:move;
+  z-index:1000;
 }
 #command-box.hidden{
   display:none;
@@ -148,6 +148,8 @@ body{
   font-size:12px;
   margin-bottom:4px;
   color:#2ecc71;
+  text-align:center;
+  font-weight:bold;
 }
 #command-box input{
   width:100%;
