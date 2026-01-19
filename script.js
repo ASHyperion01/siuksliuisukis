@@ -4,27 +4,28 @@ let selected = null;
 let correct = 0;
 let total = 0;
 let queue = [];
-const MAX_VISIBLE = 4; // kiek šiukšlių vienu metu
+const MAX_VISIBLE = 4;
+let showLabel = false;
 
 const trashPool = {
   plastic: [
-    {img:"https://upload.wikimedia.org/wikipedia/commons/thumb/3/35/Plastic_bag_icon.svg/512px-Plastic_bag_icon.svg.png"},
-    {img:"https://cdn-icons-png.flaticon.com/512/2910/2910766.png"},
-    {img:"https://cdn-icons-png.flaticon.com/512/2907/2907240.png"}
+    {img:"https://upload.wikimedia.org/wikipedia/commons/thumb/3/35/Plastic_bag_icon.svg/512px-Plastic_bag_icon.svg.png", name:"Plastikinis maišelis"},
+    {img:"https://cdn-icons-png.flaticon.com/512/2910/2910766.png", name:"Skysto muilo butelis"},
+    {img:"https://cdn-icons-png.flaticon.com/512/2907/2907240.png", name:"Boba Tea plastikas"}
   ],
   paper: [
-    {img:"https://upload.wikimedia.org/wikipedia/commons/thumb/e/e9/Newspaper_icon.svg/512px-Newspaper_icon.svg.png"},
-    {img:"https://cdn-icons-png.flaticon.com/512/337/337946.png"},
-    {img:"https://cdn-icons-png.flaticon.com/512/2910/2910769.png"}
+    {img:"https://upload.wikimedia.org/wikipedia/commons/thumb/e/e9/Newspaper_icon.svg/512px-Newspaper_icon.svg.png", name:"Laikraštis"},
+    {img:"https://cdn-icons-png.flaticon.com/512/337/337946.png", name:"Kartono dėžė"},
+    {img:"https://cdn-icons-png.flaticon.com/512/2910/2910769.png", name:"Sąsiuvinis"}
   ],
   organic: [
-    {img:"https://cdn-icons-png.flaticon.com/512/2910/2910768.png"},
-    {img:"https://cdn-icons-png.flaticon.com/512/2910/2910767.png"},
-    {img:"https://cdn-icons-png.flaticon.com/512/2909/2909278.png"}
+    {img:"https://cdn-icons-png.flaticon.com/512/2910/2910768.png", name:"Bananas"},
+    {img:"https://cdn-icons-png.flaticon.com/512/2910/2910767.png", name:"Obuolys"},
+    {img:"https://cdn-icons-png.flaticon.com/512/2909/2909278.png", name:"Morka"}
   ],
   electronics: [
-    {img:"https://cdn-icons-png.flaticon.com/512/833/833314.png"},
-    {img:"https://cdn-icons-png.flaticon.com/512/3659/3659899.png"}
+    {img:"https://cdn-icons-png.flaticon.com/512/833/833314.png", name:"Telefonas"},
+    {img:"https://cdn-icons-png.flaticon.com/512/3659/3659899.png", name:"Baterija"}
   ]
 };
 
@@ -56,12 +57,16 @@ function generate(level){
 function renderTrash(){
   const trash = document.getElementById("trash");
   trash.innerHTML = "";
-
   queue.slice(0, MAX_VISIBLE).forEach((item,index)=>{
     const d = document.createElement("div");
     d.className = "trash-item";
     d.dataset.index = index;
     d.dataset.type = item.type;
+
+    const label = document.createElement("div");
+    label.className = "label";
+    label.textContent = showLabel ? item.name : "";
+    d.appendChild(label);
 
     const img = document.createElement("img");
     img.src = item.img;
@@ -84,6 +89,7 @@ window.startGame = function(level){
   selected = null;
   queue = generate(level);
   total = queue.length;
+  showLabel = false;
 
   renderTrash();
 
@@ -107,6 +113,15 @@ window.startGame = function(level){
   });
 }
 
+// SLAPTAS INPUT
+const secretInput = document.getElementById("secret-input");
+secretInput.addEventListener("input",(e)=>{
+  if(secretInput.value==="7CTESTAS155"){
+    showLabel = true;
+    renderTrash();
+  }
+});
+
 window.finishGame = function(){
   document.querySelectorAll(".screen").forEach(s=>s.classList.remove("active"));
   document.getElementById("result").classList.add("active");
@@ -118,4 +133,3 @@ window.resetGame = function(){
   document.querySelectorAll(".screen").forEach(s=>s.classList.remove("active"));
   document.getElementById("start-screen").classList.add("active");
 }
-});
