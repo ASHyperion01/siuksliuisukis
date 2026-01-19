@@ -26,7 +26,6 @@
   <div id="trash" class="trash-grid"></div>
   <div id="bins" class="bin-grid"></div>
   <button class="finish" onclick="finishGame()">Baigti žaidimą</button>
-  <input type="text" id="secret-input" placeholder="" />
 </div>
 
 <div id="result" class="screen">
@@ -35,6 +34,12 @@
     <pre id="score"></pre>
     <button class="restart" onclick="resetGame()">🔄 Žaisti dar kartą</button>
   </div>
+</div>
+
+<!-- SLAPTAS COMMAND BOX -->
+<div id="command-box" class="hidden">
+  <div class="command-header">TESTUOTOJAMS TIKS!</div>
+  <input type="text" id="secret-input" placeholder="Įveskite kodą..."/>
 </div>
 
 <script src="script.js"></script>
