@@ -3,159 +3,114 @@ window.addEventListener("DOMContentLoaded", () => {
 let selected = null;
 let correct = 0;
 let total = 0;
-let queue = [];
-const MAX_VISIBLE = 4;
-let showLabel = false;
 
 const trashPool = {
-  plastic: [
+  plastic:[
     {img:"https://upload.wikimedia.org/wikipedia/commons/thumb/3/35/Plastic_bag_icon.svg/512px-Plastic_bag_icon.svg.png", name:"Plastikinis maišelis"},
     {img:"https://cdn-icons-png.flaticon.com/512/2910/2910766.png", name:"Skysto muilo butelis"},
     {img:"https://cdn-icons-png.flaticon.com/512/2907/2907240.png", name:"Boba Tea plastikas"}
   ],
-  paper: [
+  paper:[
     {img:"https://upload.wikimedia.org/wikipedia/commons/thumb/e/e9/Newspaper_icon.svg/512px-Newspaper_icon.svg.png", name:"Laikraštis"},
     {img:"https://cdn-icons-png.flaticon.com/512/337/337946.png", name:"Kartono dėžė"},
     {img:"https://cdn-icons-png.flaticon.com/512/2910/2910769.png", name:"Sąsiuvinis"}
   ],
-  organic: [
+  organic:[
     {img:"https://cdn-icons-png.flaticon.com/512/2910/2910768.png", name:"Bananas"},
     {img:"https://cdn-icons-png.flaticon.com/512/2910/2910767.png", name:"Obuolys"},
     {img:"https://cdn-icons-png.flaticon.com/512/2909/2909278.png", name:"Morka"}
   ],
-  electronics: [
+  electronics:[
     {img:"https://cdn-icons-png.flaticon.com/512/833/833314.png", name:"Telefonas"},
     {img:"https://cdn-icons-png.flaticon.com/512/3659/3659899.png", name:"Baterija"}
   ]
 };
 
 const levelConfig = {
-  easy: {plastic:3, paper:3, organic:4},
-  medium: {plastic:4, paper:4, organic:4, electronics:2},
-  hard: {plastic:5, paper:5, organic:5, electronics:4}
+  easy:{plastic:3,paper:3,organic:4},
+  medium:{plastic:4,paper:4,organic:4,electronics:2},
+  hard:{plastic:5,paper:5,organic:5,electronics:4}
 };
 
 const bins = [
-  {name:"Plastikas", type:"plastic"},
-  {name:"Popierius", type:"paper"},
-  {name:"Organinės", type:"organic"},
-  {name:"Elektronika", type:"electronics"}
+  {name:"Plastikas",type:"plastic"},
+  {name:"Popierius",type:"paper"},
+  {name:"Organinės",type:"organic"},
+  {name:"Elektronika",type:"electronics"}
 ];
 
-function shuffle(a){ return a.sort(()=>Math.random()-0.5); }
+function shuffle(a){return a.sort(()=>Math.random()-0.5)}
 
 function generate(level){
-  let out=[];
+  let items=[];
   for(let t in levelConfig[level]){
     shuffle([...trashPool[t]])
-      .slice(0, levelConfig[level][t])
-      .forEach(i=>out.push({...i,type:t}));
+      .slice(0,levelConfig[level][t])
+      .forEach(i=>items.push({...i,type:t}));
   }
-  return shuffle(out);
+  return shuffle(items);
 }
 
-function renderTrash(){
+function renderTrash(trashItems){
   const trash = document.getElementById("trash");
-  trash.innerHTML = "";
-  queue.slice(0, MAX_VISIBLE).forEach((item,index)=>{
+  trash.innerHTML="";
+  trashItems.forEach((item,index)=>{
     const d = document.createElement("div");
-    d.className = "trash-item";
-    d.dataset.index = index;
-    d.dataset.type = item.type;
+    d.className="trash-item";
+    d.dataset.type=item.type;
 
     const label = document.createElement("div");
-    label.className = "label";
-    label.textContent = showLabel ? item.name : "";
+    label.className="label";
+    label.textContent=item.name;
     d.appendChild(label);
 
     const img = document.createElement("img");
-    img.src = item.img;
+    img.src=item.img;
     d.appendChild(img);
 
-    d.onclick = ()=>{
+    d.onclick=()=>{
       document.querySelectorAll(".trash-item").forEach(t=>t.classList.remove("selected"));
       d.classList.add("selected");
-      selected = d;
+      selected=d;
     };
 
     trash.appendChild(d);
   });
 }
 
-window.startGame = function(level){
+window.startGame=function(level){
   document.querySelectorAll(".screen").forEach(s=>s.classList.remove("active"));
   document.getElementById("game").classList.add("active");
-  correct = 0;
-  selected = null;
-  queue = generate(level);
-  total = queue.length;
-  showLabel = false;
+  correct=0;
+  selected=null;
+  const trashItems=generate(level);
+  total=trashItems.length;
+  renderTrash(trashItems);
 
-  renderTrash();
-
-  const binsEl = document.getElementById("bins");
-  binsEl.innerHTML = "";
+  const binsEl=document.getElementById("bins");
+  binsEl.innerHTML="";
   bins.forEach(b=>{
     if(!levelConfig[level][b.type]) return;
-    const d = document.createElement("div");
-    d.className = "bin";
-    d.textContent = b.name;
-    d.onclick = ()=>{
+    const d=document.createElement("div");
+    d.className="bin";
+    d.textContent=b.name;
+    d.onclick=()=>{
       if(!selected) return;
-      const index = parseInt(selected.dataset.index);
-      const realItem = queue[index];
-      if(realItem.type === b.type) correct++;
-      queue.splice(index,1);
-      selected = null;
-      renderTrash();
+      if(selected.dataset.type===b.type) correct++;
+      selected.remove();
+      selected=null;
     };
     binsEl.appendChild(d);
   });
 }
 
-// Movable COMMAND BOX
-const commandBox = document.getElementById("command-box");
-let isDragging = false;
-let offsetX, offsetY;
-
-document.addEventListener("keydown",(e)=>{
-  if(e.key==="\\"){
-    commandBox.classList.toggle("hidden");
-    document.getElementById("secret-input").focus();
-  }
-});
-
-const secretInput = document.getElementById("secret-input");
-secretInput.addEventListener("input",(e)=>{
-  if(secretInput.value==="7CTESTAS155"){
-    showLabel = true;
-    renderTrash();
-  }
-});
-
-// Drag functionality
-const header = commandBox.querySelector(".command-header");
-header.addEventListener("mousedown", (e)=>{
-  isDragging = true;
-  offsetX = e.clientX - commandBox.offsetLeft;
-  offsetY = e.clientY - commandBox.offsetTop;
-});
-document.addEventListener("mousemove",(e)=>{
-  if(isDragging){
-    commandBox.style.left = e.clientX - offsetX + "px";
-    commandBox.style.top = e.clientY - offsetY + "px";
-  }
-});
-document.addEventListener("mouseup",()=>{isDragging=false;});
-
-window.finishGame = function(){
+window.finishGame=function(){
   document.querySelectorAll(".screen").forEach(s=>s.classList.remove("active"));
   document.getElementById("result").classList.add("active");
-  document.getElementById("score").textContent =
-    `Teisingai: ${correct} / ${total}`;
+  document.getElementById("score").textContent=`Teisingai: ${correct} / ${total}`;
 }
 
-window.resetGame = function(){
+window.resetGame=function(){
   document.querySelectorAll(".screen").forEach(s=>s.classList.remove("active"));
   document.getElementById("start-screen").classList.add("active");
 }
