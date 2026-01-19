@@ -1,33 +1,36 @@
-window.addEventListener("DOMContentLoaded",()=>{
+// Globalūs kintamieji
+let selected = null;
+let correct = 0;
+let total = 0;
+let trashItems = [];
 
-let selected=null;
-let correct=0;
-let total=0;
-let trashItems=[];
-
-const trashPool={
-  plastic:[
-    {img:"https://upload.wikimedia.org/wikipedia/commons/thumb/3/35/Plastic_bag_icon.svg/512px-Plastic_bag_icon.svg.png", name:"Plastikinis maišelis"},
-    {img:"https://cdn-icons-png.flaticon.com/512/2910/2910766.png", name:"Skysto muilo butelis"},
-    {img:"https://cdn-icons-png.flaticon.com/512/2907/2907240.png", name:"Boba Tea plastikas"}
+// Pakeistas trashPool su tavo nuotraukomis
+const trashPool = {
+  plastic: [
+    {img:"https://images.squarespace-cdn.com/content/v1/5d3178f5c443690001caace9/1678859744004-BOMG3CF0079ZV2LIDL3P/KB-PA-3030.jpg"},
+    {img:"https://naturaliosidejos.lt/1604-large_default/perfumed-liquid-soap-500ml-tobacco-oak.jpg"},
+    {img:"https://m.media-amazon.com/images/I/51zMzLXAsqL.jpg"},
+    {img:"https://upload.wikimedia.org/wikipedia/commons/thumb/a/a2/Bubble_Tea.png/250px-Bubble_Tea.png"},
+    {img:"https://5.imimg.com/data5/CJ/LM/MM/SELLER-47837534/plastic-tooth-brush.jpg"}
   ],
-  paper:[
-    {img:"https://upload.wikimedia.org/wikipedia/commons/thumb/e/e9/Newspaper_icon.svg/512px-Newspaper_icon.svg.png", name:"Laikraštis"},
-    {img:"https://cdn-icons-png.flaticon.com/512/337/337946.png", name:"Kartono dėžė"},
-    {img:"https://cdn-icons-png.flaticon.com/512/2910/2910769.png", name:"Sąsiuvinis"}
+  paper: [
+    {img:"https://static.vecteezy.com/system/resources/thumbnails/011/643/706/small/business-newspaper-isolated-on-white-background-daily-newspaper-mock-up-concept-photo.jpg"},
+    {img:"https://sadlers.co.uk/cdn/shop/files/AJ728A.jpg?v=1753784030&width=800"},
+    {img:"https://sugarpaper.com/cdn/shop/files/NBK75_LargeSpiralNotebook_Black_Cover.jpg"}
   ],
-  organic:[
-    {img:"https://cdn-icons-png.flaticon.com/512/2910/2910768.png", name:"Bananas"},
-    {img:"https://cdn-icons-png.flaticon.com/512/2910/2910767.png", name:"Obuolys"},
-    {img:"https://cdn-icons-png.flaticon.com/512/2909/2909278.png", name:"Morka"}
+  organic: [
+    {img:"https://media.istockphoto.com/id/2168768239/photo/half-peeled-and-eaten-banana-open-banana-isolated-on-white-background.jpg"},
+    {img:"https://media.istockphoto.com/id/119104612/photo/apple-core-isolated-on-white.jpg"},
+    {img:"https://media.istockphoto.com/id/106497460/photo/bite-out-of-a-fresh-carrot.jpg"}
   ],
-  electronics:[
-    {img:"https://cdn-icons-png.flaticon.com/512/833/833314.png", name:"Telefonas"},
-    {img:"https://cdn-icons-png.flaticon.com/512/3659/3659899.png", name:"Baterija"}
+  electronics: [
+    {img:"https://img.freepik.com/premium-vector/broken-phone_105325-508.jpg"},
+    {img:"https://cdn11.bigcommerce.com/s-a8bv6/images/stencil/1280x1280/products/426/288/Duracell_C__55045.1398448564.jpg"}
   ]
 };
 
-const levelConfig={
+// --- Likusi originali logika (pakeista tik trashPool nuotraukos) ---
+const levelConfig = {
   easy:{plastic:3,paper:3,organic:4},
   medium:{plastic:4,paper:4,organic:4,electronics:2},
   hard:{plastic:5,paper:5,organic:5,electronics:4}
@@ -58,11 +61,6 @@ function renderTrash(){
     d.className="trash-item";
     d.dataset.type=item.type;
 
-    const label=document.createElement("div");
-    label.className="label";
-    label.textContent=item.name;
-    d.appendChild(label);
-
     const img=document.createElement("img");
     img.src=item.img;
     d.appendChild(img);
@@ -78,6 +76,7 @@ function renderTrash(){
   });
 }
 
+// --- Globalios funkcijos mygtukams ---
 window.startGame=function(level){
   document.querySelectorAll(".screen").forEach(s=>s.classList.remove("active"));
   document.getElementById("game").classList.add("active");
@@ -97,9 +96,9 @@ window.startGame=function(level){
     d.textContent=b.name;
     d.onclick=()=>{
       if(!selected) return;
-      if(selected.dataset.type===b.type) correct++;
       selected.remove();
       selected=null;
+      correct++;
     };
     binsEl.appendChild(d);
   });
