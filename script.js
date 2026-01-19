@@ -1,10 +1,8 @@
-// Globalūs kintamieji
 let selected = null;
 let correct = 0;
 let total = 0;
 let trashItems = [];
 
-// Pakeistas trashPool su tavo nuotraukomis
 const trashPool = {
   plastic: [
     {img:"https://images.squarespace-cdn.com/content/v1/5d3178f5c443690001caace9/1678859744004-BOMG3CF0079ZV2LIDL3P/KB-PA-3030.jpg"},
@@ -29,7 +27,6 @@ const trashPool = {
   ]
 };
 
-// --- Likusi originali logika (pakeista tik trashPool nuotraukos) ---
 const levelConfig = {
   easy:{plastic:3,paper:3,organic:4},
   medium:{plastic:4,paper:4,organic:4,electronics:2},
@@ -76,7 +73,7 @@ function renderTrash(){
   });
 }
 
-// --- Globalios funkcijos mygtukams ---
+// --- globalios funkcijos mygtukams ---
 window.startGame=function(level){
   document.querySelectorAll(".screen").forEach(s=>s.classList.remove("active"));
   document.getElementById("game").classList.add("active");
@@ -96,9 +93,9 @@ window.startGame=function(level){
     d.textContent=b.name;
     d.onclick=()=>{
       if(!selected) return;
+      if(selected.dataset.type===b.type) correct++;
       selected.remove();
       selected=null;
-      correct++;
     };
     binsEl.appendChild(d);
   });
