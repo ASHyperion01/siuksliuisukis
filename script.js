@@ -1,10 +1,11 @@
-window.addEventListener("DOMContentLoaded", () => {
+window.addEventListener("DOMContentLoaded",()=>{
 
-let selected = null;
-let correct = 0;
-let total = 0;
+let selected=null;
+let correct=0;
+let total=0;
+let trashItems=[];
 
-const trashPool = {
+const trashPool={
   plastic:[
     {img:"https://upload.wikimedia.org/wikipedia/commons/thumb/3/35/Plastic_bag_icon.svg/512px-Plastic_bag_icon.svg.png", name:"Plastikinis maišelis"},
     {img:"https://cdn-icons-png.flaticon.com/512/2910/2910766.png", name:"Skysto muilo butelis"},
@@ -26,13 +27,13 @@ const trashPool = {
   ]
 };
 
-const levelConfig = {
+const levelConfig={
   easy:{plastic:3,paper:3,organic:4},
   medium:{plastic:4,paper:4,organic:4,electronics:2},
   hard:{plastic:5,paper:5,organic:5,electronics:4}
 };
 
-const bins = [
+const bins=[
   {name:"Plastikas",type:"plastic"},
   {name:"Popierius",type:"paper"},
   {name:"Organinės",type:"organic"},
@@ -44,27 +45,25 @@ function shuffle(a){return a.sort(()=>Math.random()-0.5)}
 function generate(level){
   let items=[];
   for(let t in levelConfig[level]){
-    shuffle([...trashPool[t]])
-      .slice(0,levelConfig[level][t])
-      .forEach(i=>items.push({...i,type:t}));
+    shuffle([...trashPool[t]]).slice(0,levelConfig[level][t]).forEach(i=>items.push({...i,type:t}));
   }
   return shuffle(items);
 }
 
-function renderTrash(trashItems){
-  const trash = document.getElementById("trash");
+function renderTrash(){
+  const trash=document.getElementById("trash");
   trash.innerHTML="";
   trashItems.forEach((item,index)=>{
-    const d = document.createElement("div");
+    const d=document.createElement("div");
     d.className="trash-item";
     d.dataset.type=item.type;
 
-    const label = document.createElement("div");
+    const label=document.createElement("div");
     label.className="label";
     label.textContent=item.name;
     d.appendChild(label);
 
-    const img = document.createElement("img");
+    const img=document.createElement("img");
     img.src=item.img;
     d.appendChild(img);
 
@@ -75,6 +74,7 @@ function renderTrash(trashItems){
     };
 
     trash.appendChild(d);
+    setTimeout(()=>d.classList.add("show"), index*150); // animacija po viena
   });
 }
 
@@ -83,9 +83,9 @@ window.startGame=function(level){
   document.getElementById("game").classList.add("active");
   correct=0;
   selected=null;
-  const trashItems=generate(level);
+  trashItems=generate(level);
   total=trashItems.length;
-  renderTrash(trashItems);
+  renderTrash();
 
   const binsEl=document.getElementById("bins");
   binsEl.innerHTML="";
