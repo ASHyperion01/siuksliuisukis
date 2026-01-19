@@ -17,8 +17,8 @@ const trashPool = {
     {img:"https://sugarpaper.com/cdn/shop/files/NBK75_LargeSpiralNotebook_Black_Cover.jpg"}
   ],
   organic: [
-    {img:"https://media.istockphoto.com/id/2168768239/photo/half-peeled-and-eaten-banana-open-banana-isolated-on-white-background.jpg"},
-    {img:"https://media.istockphoto.com/id/119104612/photo/apple-core-isolated-on-white.jpg"},
+    {img:"https://media.istockphoto.com/id/146805514/photo/banana-skin.jpg?s=612x612&w=0&k=20&c=yJwjbj8l671Y8WGeASM-1vnZ1HRsKLoVmtJk2IeY3DA="},
+    {img:"https://thumbs.dreamstime.com/b/eaten-apple-close-up-white-background-isolated-eaten-apple-close-up-white-isolated-136817997.jpg"},
     {img:"https://media.istockphoto.com/id/106497460/photo/bite-out-of-a-fresh-carrot.jpg"}
   ],
   electronics: [
@@ -111,3 +111,4 @@ window.resetGame=function(){
   document.querySelectorAll(".screen").forEach(s=>s.classList.remove("active"));
   document.getElementById("start-screen").classList.add("active");
 }
+
