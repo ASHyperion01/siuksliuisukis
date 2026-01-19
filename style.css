@@ -6,6 +6,7 @@ body{
   text-align:center;
 }
 
+/* SCREENS */
 .screen{
   display:none;
   min-height:100vh;
@@ -77,10 +78,10 @@ body{
   font-size:12px;
   padding:2px 4px;
   border-radius:4px;
-  display:none; /* slėpti kol neaktyvuota */
+  display:none;
 }
 
-/* BINS – ŽALIOS */
+/* BINS */
 .bin-grid{
   display:grid;
   grid-template-columns:repeat(auto-fit,minmax(90px,1fr));
@@ -98,7 +99,7 @@ body{
   font-weight:bold;
 }
 
-/* ŽAIDIMO MYGTUKAI – ŽALIOS */
+/* ŽAIDIMO MYGTUKAI */
 .finish,.restart{
   margin-top:12px;
   padding:10px 22px;
@@ -125,14 +126,35 @@ body{
   border-radius:20px;
 }
 
-/* SLAPTAS INPUT – beveik nematomas */
-#secret-input{
+/* COMMAND BOX – SLAPTAS */
+#command-box{
   position:fixed;
-  bottom:5px;
-  left:5px;
-  width:120px;
-  opacity:0.05;
+  bottom:20px;
+  left:50%;
+  transform:translateX(-50%);
+  background:rgba(0,0,0,0.85);
+  padding:10px 12px;
+  border-radius:10px;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  min-width:200px;
+  z-index:100;
+}
+#command-box.hidden{
+  display:none;
+}
+#command-box .command-header{
+  font-size:12px;
+  margin-bottom:4px;
+  color:#2ecc71;
+}
+#command-box input{
+  width:100%;
+  padding:4px 6px;
+  border-radius:6px;
   border:none;
-  background:black;
+  background:#222;
   color:white;
+  font-size:14px;
 }
