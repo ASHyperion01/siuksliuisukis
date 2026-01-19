@@ -52,7 +52,7 @@ const bins=[
   {name:"Popierius",type:"paper"},
   {name:"Organinės",type:"organic"},
   {name:"Elektronika",type:"electronics"},
-  {name:"Stiklas",type:"glass"} // pridėta stiklo šiukšlė
+  {name:"Stiklas",type:"glass"}
 ];
 
 function shuffle(a){return a.sort(()=>Math.random()-0.5)}
@@ -84,11 +84,10 @@ function renderTrash(){
     };
 
     trash.appendChild(d);
-    setTimeout(()=>d.classList.add("show"), index*150);
+    setTimeout(()=>d.classList.add("show"), index*100);
   });
 }
 
-// --- globalios funkcijos mygtukams ---
 window.startGame=function(level){
   document.querySelectorAll(".screen").forEach(s=>s.classList.remove("active"));
   document.getElementById("game").classList.add("active");
