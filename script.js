@@ -20,31 +20,24 @@ const trashPool = {
   organic: [
     {img:"https://media.istockphoto.com/id/146805514/photo/banana-skin.jpg?s=612x612&w=0&k=20&c=yJwjbj8l671Y8WGeASM-1vnZ1HRsKLoVmtJk2IeY3DA="},
     {img:"https://thumbs.dreamstime.com/b/eaten-apple-close-up-white-background-isolated-eaten-apple-close-up-white-isolated-136817997.jpg"},
-    {img:"https://www.allthatgrows.in/cdn/shop/products/Carrot-Orange.jpg?v=1598079671"},
-    {img:"https://www.veggipedia.nl/_next/image?url=https%3A%2F%2Fveggipedia-cms.production.taks.zooma.cloud%2Fassets%2FUploads%2FProducts%2FAardappel-groenten-Veggipedia__FitMaxWzYwMCw2MDBd.png&w=3840&q=75"},
-    {img:"https://media.istockphoto.com/id/172205213/photo/chicken-drumstick-with-bite-missing.jpg?s=612x612&w=0&k=20&c=QQ85AHEP6oyS1GuLPpy4AMK5FOawc4iW-L639zC4r1w="}
+    {img:"https://www.allthatgrows.in/cdn/shop/products/Carrot-Orange.jpg?v=1598079671"}
   ],
   electronics: [
     {img:"https://img.freepik.com/premium-vector/broken-phone_105325-508.jpg"},
-    {img:"https://cdn11.bigcommerce.com/s-a8bv6/images/stencil/1280x1280/products/426/288/Duracell_C__55045.1398448564.jpg"},
-    {img:"https://store.hp.com/app/assets/images/uploads/prod/top-3-ways-computer-screen-repair-hero1551994969454.png"},
-    {img:"https://www.cnet.com/a/img/resize/f9414cf6d3a45cc61861fd15cc8dadd52d701975/hub/2016/04/22/b9d00103-f05f-426a-9de9-af1f4d189541/recycle-old-cables-chargers.jpg?auto=webp&width=1200"},
-    {img:"https://cdn11.bigcommerce.com/s-8vy557m296/images/stencil/original/products/342/4555/30_SMC2266KS_3QR_WEB__24717.1740693309.JPG?c=2"}
+    {img:"https://cdn11.bigcommerce.com/s-a8bv6/images/stencil/1280x1280/products/426/288/Duracell_C__55045.1398448564.jpg"}
   ],
   glass: [
     {img:"https://sansdrinks.com.au/cdn/shop/files/Buy-1920-Wines-Non-Alcoholic-Sparkling-Shiraz-Sansdrinks-37080272339168.jpg?v=1755851767"},
     {img:"https://assets.manufactum.de/p/067/067835/67835_01.jpg/drinking-glass-jus.jpg"},
     {img:"https://cdn11.bigcommerce.com/s-xizoo/images/stencil/original/products/1042/4014/ECO12GB__23886.1707332829.jpg"},
-    {img:"https://media.royaldesign.co.uk/6/spiegelau-salute-red-wine-glass-set-of-4-55-cl-13?w=800&quality=80"},
-    {img:"https://cdn.pixabay.com/photo/2017/06/15/23/56/mirror-frame-2407292_640.png"},
-    {img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTxLoLS9gof52cqQ9pAv28_rQ-iA9EdDI3kYQ&s"}
+    {img:"https://media.royaldesign.co.uk/6/spiegelau-salute-red-wine-glass-set-of-4-55-cl-13?w=800&quality=80"}
   ]
 };
 
 const levelConfig = {
-  easy:{plastic:3,paper:3,organic:4,glass:2},
+  easy:{plastic:3,paper:3,organic:3,glass:2},
   medium:{plastic:4,paper:4,organic:4,electronics:2,glass:3},
-  hard:{plastic:5,paper:5,organic:5,electronics:5,glass:4}
+  hard:{plastic:5,paper:5,organic:5,electronics:4,glass:4}
 };
 
 const bins=[
