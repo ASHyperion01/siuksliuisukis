@@ -14,23 +14,29 @@ const trashPool = {
   paper: [
     {img:"https://static.vecteezy.com/system/resources/thumbnails/011/643/706/small/business-newspaper-isolated-on-white-background-daily-newspaper-mock-up-concept-photo.jpg"},
     {img:"https://sadlers.co.uk/cdn/shop/files/AJ728A.jpg?v=1753784030&width=800"},
-    {img:"https://sugarpaper.com/cdn/shop/files/NBK75_LargeSpiralNotebook_Black_Cover.jpg"}
+    {img:"https://sugarpaper.com/cdn/shop/files/NBK75_LargeSpiralNotebook_Black_Cover.jpg"},
+    {img:"https://allcitycandy.com/cdn/shop/products/a5214c3a-8860-4d09-aab4-70524e7a0921.8ccd57d5e98c67f93544c8a059fe15b9.jpg?v=1632837195"}
   ],
   organic: [
     {img:"https://media.istockphoto.com/id/146805514/photo/banana-skin.jpg?s=612x612&w=0&k=20&c=yJwjbj8l671Y8WGeASM-1vnZ1HRsKLoVmtJk2IeY3DA="},
     {img:"https://thumbs.dreamstime.com/b/eaten-apple-close-up-white-background-isolated-eaten-apple-close-up-white-isolated-136817997.jpg"},
-    {img:"https://www.allthatgrows.in/cdn/shop/products/Carrot-Orange.jpg?v=1598079671"}
+    {img:"https://www.allthatgrows.in/cdn/shop/products/Carrot-Orange.jpg?v=1598079671"},
+    {img:"https://www.veggipedia.nl/_next/image?url=https%3A%2F%2Fveggipedia-cms.production.taks.zooma.cloud%2Fassets%2FUploads%2FProducts%2FAardappel-groenten-Veggipedia__FitMaxWzYwMCw2MDBd.png&w=3840&q=75"},
+    {img:"https://media.istockphoto.com/id/172205213/photo/chicken-drumstick-with-bite-missing.jpg?s=612x612&w=0&k=20&c=QQ85AHEP6oyS1GuLPpy4AMK5FOawc4iW-L639zC4r1w="}
   ],
   electronics: [
     {img:"https://img.freepik.com/premium-vector/broken-phone_105325-508.jpg"},
-    {img:"https://cdn11.bigcommerce.com/s-a8bv6/images/stencil/1280x1280/products/426/288/Duracell_C__55045.1398448564.jpg"}
+    {img:"https://cdn11.bigcommerce.com/s-a8bv6/images/stencil/1280x1280/products/426/288/Duracell_C__55045.1398448564.jpg"},
+    {img:"https://store.hp.com/app/assets/images/uploads/prod/top-3-ways-computer-screen-repair-hero1551994969454.png"},
+    {img:"https://www.cnet.com/a/img/resize/f9414cf6d3a45cc61861fd15cc8dadd52d701975/hub/2016/04/22/b9d00103-f05f-426a-9de9-af1f4d189541/recycle-old-cables-chargers.jpg?auto=webp&width=1200"},
+    {img:"https://cdn11.bigcommerce.com/s-8vy557m296/images/stencil/original/products/342/4555/30_SMC2266KS_3QR_WEB__24717.1740693309.JPG?c=2"}
   ]
 };
 
 const levelConfig = {
   easy:{plastic:3,paper:3,organic:4},
   medium:{plastic:4,paper:4,organic:4,electronics:2},
-  hard:{plastic:5,paper:5,organic:5,electronics:4}
+  hard:{plastic:5,paper:5,organic:5,electronics:5}
 };
 
 const bins=[
@@ -111,5 +117,6 @@ window.resetGame=function(){
   document.querySelectorAll(".screen").forEach(s=>s.classList.remove("active"));
   document.getElementById("start-screen").classList.add("active");
 }
+
 
 
