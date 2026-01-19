@@ -11,8 +11,6 @@ body{
   display:none;
   min-height:100vh;
   padding:16px;
-  justify-content:center;
-  align-items:center;
   flex-direction:column;
 }
 .screen.active{display:flex}
@@ -23,8 +21,13 @@ body{
   padding:28px;
   border-radius:20px;
 }
+.level-cards{
+  display:flex;
+  flex-direction:column;
+  gap:12px;
+  align-items:center;
+}
 .level-cards button{
-  margin:6px;
   padding:14px 28px;
   border:none;
   border-radius:16px;
@@ -34,9 +37,7 @@ body{
   font-size:16px;
   cursor:pointer;
 }
-.level-cards button:hover{
-  background:#27ae60;
-}
+.level-cards button:hover{background:#27ae60;}
 .footer-text{
   color:white;
   font-size:12px;
@@ -50,6 +51,7 @@ body{
   gap:10px;
   margin:12px;
   flex-wrap:wrap;
+  justify-content:center;
 }
 .trash-item{
   width:100px;
@@ -61,6 +63,13 @@ body{
   align-items:center;
   justify-content:center;
   position:relative;
+  opacity:0;
+  transform:translateY(-20px);
+  transition:all 0.3s ease;
+}
+.trash-item.show{
+  opacity:1;
+  transform:translateY(0);
 }
 .trash-item img{
   max-width:85px;
