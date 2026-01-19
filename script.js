@@ -19,7 +19,7 @@ const trashPool = {
   organic: [
     {img:"https://media.istockphoto.com/id/146805514/photo/banana-skin.jpg?s=612x612&w=0&k=20&c=yJwjbj8l671Y8WGeASM-1vnZ1HRsKLoVmtJk2IeY3DA="},
     {img:"https://thumbs.dreamstime.com/b/eaten-apple-close-up-white-background-isolated-eaten-apple-close-up-white-isolated-136817997.jpg"},
-    {img:"https://media.istockphoto.com/id/106497460/photo/bite-out-of-a-fresh-carrot.jpg"}
+    {img:"https://www.allthatgrows.in/cdn/shop/products/Carrot-Orange.jpg?v=1598079671"}
   ],
   electronics: [
     {img:"https://img.freepik.com/premium-vector/broken-phone_105325-508.jpg"},
@@ -111,4 +111,5 @@ window.resetGame=function(){
   document.querySelectorAll(".screen").forEach(s=>s.classList.remove("active"));
   document.getElementById("start-screen").classList.add("active");
 }
+
 
