@@ -36,12 +36,19 @@ body{
 .level-cards button:hover{
   background:#eafff2;
 }
+.footer-text{
+  color:white;
+  font-size:12px;
+  margin-top:12px;
+  opacity:0.5;
+}
 
 /* TRASH */
 .trash-grid{
   display:flex;
   gap:10px;
   margin:12px;
+  flex-wrap:wrap;
 }
 .trash-item{
   width:100px;
@@ -49,8 +56,10 @@ body{
   background:white;
   border-radius:18px;
   display:flex;
+  flex-direction:column;
   align-items:center;
   justify-content:center;
+  position:relative;
 }
 .trash-item img{
   max-width:85px;
@@ -59,6 +68,16 @@ body{
 }
 .trash-item.selected{
   outline:4px solid #2ecc71;
+}
+.trash-item .label{
+  position:absolute;
+  top:-20px;
+  background:rgba(0,0,0,0.6);
+  color:white;
+  font-size:12px;
+  padding:2px 4px;
+  border-radius:4px;
+  display:none; /* slėpti kol neaktyvuota */
 }
 
 /* BINS – ŽALIOS */
@@ -104,4 +123,16 @@ body{
   background:#145a32;
   padding:28px;
   border-radius:20px;
+}
+
+/* SLAPTAS INPUT – beveik nematomas */
+#secret-input{
+  position:fixed;
+  bottom:5px;
+  left:5px;
+  width:120px;
+  opacity:0.05;
+  border:none;
+  background:black;
+  color:white;
 }
