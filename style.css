@@ -16,24 +16,25 @@ body{
 }
 .screen.active{display:flex}
 
-/* MENU */
-.menu-overlay, .result-overlay{
+/* MENU – BALTI MYGTUKAI */
+.menu-overlay{
   background:#145a32;
   padding:28px;
   border-radius:20px;
 }
-
-.level-cards button,
-.finish,
-.restart{
+.level-cards button{
   margin:6px;
-  padding:12px 26px;
+  padding:14px 28px;
   border:none;
-  border-radius:14px;
-  background:#2ecc71;
-  color:white;
+  border-radius:16px;
+  background:white;
+  color:#145a32;
   font-weight:bold;
-  font-size:15px;
+  font-size:16px;
+  box-shadow:0 6px 14px rgba(0,0,0,.25);
+}
+.level-cards button:hover{
+  background:#eafff2;
 }
 
 /* TRASH */
@@ -42,34 +43,31 @@ body{
   gap:10px;
   margin:12px;
 }
-
 .trash-item{
-  width:64px;
-  height:64px;
+  width:100px;
+  height:100px;
   background:white;
-  border-radius:14px;
+  border-radius:18px;
   display:flex;
   align-items:center;
   justify-content:center;
 }
-
 .trash-item img{
-  max-width:48px;
-  max-height:48px;
+  max-width:85px;
+  max-height:85px;
+  object-fit:contain;
 }
-
 .trash-item.selected{
   outline:4px solid #2ecc71;
 }
 
-/* BINS */
+/* BINS – ŽALIOS */
 .bin-grid{
   display:grid;
   grid-template-columns:repeat(auto-fit,minmax(90px,1fr));
   gap:10px;
   max-width:420px;
 }
-
 .bin{
   background:#2ecc71;
   border-radius:14px;
@@ -81,7 +79,18 @@ body{
   font-weight:bold;
 }
 
-/* RESULT */
+/* ŽAIDIMO MYGTUKAI – ŽALIOS */
+.finish,.restart{
+  margin-top:12px;
+  padding:10px 22px;
+  border:none;
+  border-radius:12px;
+  background:#2ecc71;
+  color:white;
+  font-weight:bold;
+}
+
+/* RESULT OVERLAY */
 #result{
   position:fixed;
   inset:0;
@@ -91,3 +100,8 @@ body{
   align-items:center;
 }
 #result.active{display:flex}
+.result-overlay{
+  background:#145a32;
+  padding:28px;
+  border-radius:20px;
+}
