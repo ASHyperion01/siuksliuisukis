@@ -113,7 +113,15 @@ window.startGame = function(level){
   });
 }
 
-// SLAPTAS INPUT
+// SLAPTAS COMMAND BOX – atsiranda paspaudus "\"
+const commandBox = document.getElementById("command-box");
+document.addEventListener("keydown",(e)=>{
+  if(e.key==="\\"){
+    commandBox.classList.toggle("hidden");
+    document.getElementById("secret-input").focus();
+  }
+});
+
 const secretInput = document.getElementById("secret-input");
 secretInput.addEventListener("input",(e)=>{
   if(secretInput.value==="7CTESTAS155"){
