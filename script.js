@@ -1,44 +1,44 @@
 window.addEventListener("DOMContentLoaded", () => {
 
-let selectedItem = null;
+let selected = null;
 let correct = 0;
 let total = 0;
 let mistakes = [];
 
 const trashPool = {
-  plastic:["🛍️","🧴","🥡","🧋"],
-  paper:["📄","📦","📰"],
-  organic:["🍌","🍎","🥕","🥬","🍉"],
-  metal:["🥫","🔩","🪙"],
-  glass:["🍾","🥛","🥂"],
-  electronics:["📱","💻","🎧"]
+  plastic: ["🛍️","🧴","🥡","🧋","🪥","🧃"],
+  paper: ["📄","📦","📰","📃","📘"],
+  organic: ["🍌","🍎","🥕","🥬","🍉","🥑","🍞"],
+  metal: ["🥫","🔩","🪙","🛠️"],
+  glass: ["🍾","🥛","🥂","🫙"],
+  electronics: ["📱","💻","🖥️","⌨️","🖱️","🔋","🎧","📀"]
 };
 
 const levelConfig = {
-  easy:{plastic:3,paper:3,organic:4},
-  medium:{plastic:4,paper:4,organic:4,metal:3,glass:3},
-  hard:{plastic:5,paper:4,organic:5,metal:4,glass:4,electronics:4}
+  easy: { plastic:3, paper:3, organic:4 },                // 10
+  medium: { plastic:4, paper:4, organic:4, metal:3 },     // 15
+  hard: { plastic:6, paper:5, organic:6, metal:5, glass:4, electronics:6 } // 32
 };
 
 const bins = [
-  {name:"Plastikas",type:"plastic"},
-  {name:"Popierius",type:"paper"},
-  {name:"Organinės",type:"organic"},
-  {name:"Metalas",type:"metal"},
-  {name:"Stiklas",type:"glass"},
-  {name:"Elektronika",type:"electronics"}
+  {name:"Plastikas", type:"plastic"},
+  {name:"Popierius", type:"paper"},
+  {name:"Organinės", type:"organic"},
+  {name:"Metalas", type:"metal"},
+  {name:"Stiklas", type:"glass"},
+  {name:"Elektronika", type:"electronics"}
 ];
 
 function shuffle(arr){ return arr.sort(()=>Math.random()-0.5); }
 
-function generateLevel(level){
-  let items=[];
+function generate(level){
+  let out=[];
   for(let type in levelConfig[level]){
     shuffle([...trashPool[type]])
       .slice(0, levelConfig[level][type])
-      .forEach(icon => items.push({icon,type}));
+      .forEach(icon => out.push({icon,type}));
   }
-  return shuffle(items);
+  return shuffle(out);
 }
 
 window.startGame = function(level){
@@ -46,55 +46,55 @@ window.startGame = function(level){
   document.getElementById("game").classList.add("active");
 
   document.getElementById("level-title").textContent =
-    "Lygis: " + level.toUpperCase();
+    `Lygis: ${level.toUpperCase()}`;
 
-  const trashArea = document.getElementById("trash");
-  const binsArea = document.getElementById("bins");
-  trashArea.innerHTML = "";
-  binsArea.innerHTML = "";
+  const trashEl = document.getElementById("trash");
+  const binEl = document.getElementById("bins");
+  trashEl.innerHTML = "";
+  binEl.innerHTML = "";
 
+  selected = null;
   correct = 0;
   mistakes = [];
-  selectedItem = null;
 
-  const items = generateLevel(level);
+  const items = generate(level);
   total = items.length;
 
-  items.forEach(item=>{
-    const div = document.createElement("div");
-    div.className = "trash-item";
-    div.textContent = item.icon;
-    div.dataset.type = item.type;
-    div.onclick = ()=>{
-      document.querySelectorAll(".trash-item").forEach(i=>i.classList.remove("selected"));
-      selectedItem = div;
-      div.classList.add("selected");
+  items.forEach(i=>{
+    const d = document.createElement("div");
+    d.className = "trash-item";
+    d.textContent = i.icon;
+    d.dataset.type = i.type;
+    d.onclick = ()=>{
+      document.querySelectorAll(".trash-item").forEach(t=>t.classList.remove("selected"));
+      d.classList.add("selected");
+      selected = d;
     };
-    trashArea.appendChild(div);
+    trashEl.appendChild(d);
   });
 
-  bins.forEach(bin=>{
-    if(!levelConfig[level][bin.type]) return;
-    const div = document.createElement("div");
-    div.className = "bin";
-    div.textContent = bin.name;
-    div.onclick = ()=>{
-      if(!selectedItem) return;
+  bins.forEach(b=>{
+    if(!levelConfig[level][b.type]) return;
+    const d = document.createElement("div");
+    d.className = "bin";
+    d.textContent = b.name;
+    d.onclick = ()=>{
+      if(!selected) return;
 
-      selectedItem.classList.add("removed");
+      selected.classList.add("removed");
 
-      if(selectedItem.dataset.type === bin.type){
+      if(selected.dataset.type === b.type){
         correct++;
       } else {
-        mistakes.push(`${selectedItem.textContent} → ${bin.name}`);
-        div.classList.add("error");
-        setTimeout(()=>div.classList.remove("error"),300);
+        mistakes.push(`${selected.textContent} → ${b.name}`);
+        d.classList.add("error");
+        setTimeout(()=>d.classList.remove("error"),300);
       }
 
-      setTimeout(()=>selectedItem.remove(),300);
-      selectedItem = null;
+      setTimeout(()=>selected.remove(),300);
+      selected = null;
     };
-    binsArea.appendChild(div);
+    binEl.appendChild(d);
   });
 }
 
@@ -102,9 +102,9 @@ window.finishGame = function(){
   document.querySelectorAll(".screen").forEach(s=>s.classList.remove("active"));
   document.getElementById("result").classList.add("active");
 
-  let text = `Teisingai: ${correct} / ${total}\n\n`;
-  text += mistakes.length ? "Klaidos:\n" + mistakes.join("\n") : "Puikiai! 🎉";
-  document.getElementById("score").textContent = text;
+  let txt = `Teisingai: ${correct} / ${total}\n\n`;
+  txt += mistakes.length ? "Klaidos:\n"+mistakes.join("\n") : "Puikiai! 🎉";
+  document.getElementById("score").textContent = txt;
 }
 
 window.resetGame = function(){
