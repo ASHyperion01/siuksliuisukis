@@ -26,16 +26,16 @@ body{
 /* MENU */
 .menu-overlay{
   background:var(--dark);
-  padding:30px;
-  border-radius:20px;
+  padding:32px;
+  border-radius:22px;
 }
 
 .level-cards button{
-  width:140px;
+  width:150px;
   margin:6px;
   padding:12px;
   border:none;
-  border-radius:12px;
+  border-radius:14px;
   background:var(--green);
   color:white;
   font-weight:bold;
@@ -53,12 +53,16 @@ body{
 .trash-item{
   height:56px;
   background:white;
-  border-radius:12px;
+  border-radius:14px;
   font-size:28px;
   display:flex;
   align-items:center;
   justify-content:center;
   transition:.25s;
+}
+
+.trash-item.spawn{
+  animation:pop .25s ease;
 }
 
 .trash-item.selected{
@@ -81,7 +85,7 @@ body{
 .bin{
   height:80px;
   background:var(--green);
-  border-radius:14px;
+  border-radius:16px;
   display:flex;
   align-items:center;
   justify-content:center;
@@ -91,13 +95,26 @@ body{
 
 .bin.error{background:#e74c3c}
 
+/* BUTTONS */
 .finish{
   margin-top:12px;
   padding:10px 24px;
   border:none;
-  border-radius:12px;
+  border-radius:14px;
   background:var(--green);
   color:white;
+  font-size:15px;
+}
+
+.restart{
+  margin-top:14px;
+  padding:12px 28px;
+  border:none;
+  border-radius:16px;
+  background:linear-gradient(135deg,#2ecc71,#27ae60);
+  color:white;
+  font-size:16px;
+  font-weight:bold;
 }
 
 /* RESULT */
@@ -114,7 +131,13 @@ body{
 
 .result-overlay{
   background:var(--dark);
-  padding:25px;
-  border-radius:20px;
+  padding:28px;
+  border-radius:22px;
   max-width:90%;
+}
+
+/* ANIM */
+@keyframes pop{
+  from{transform:scale(.5);opacity:0}
+  to{transform:scale(1);opacity:1}
 }
