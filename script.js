@@ -113,8 +113,11 @@ window.startGame = function(level){
   });
 }
 
-// SLAPTAS COMMAND BOX – atsiranda paspaudus "\"
+// Movable COMMAND BOX
 const commandBox = document.getElementById("command-box");
+let isDragging = false;
+let offsetX, offsetY;
+
 document.addEventListener("keydown",(e)=>{
   if(e.key==="\\"){
     commandBox.classList.toggle("hidden");
@@ -129,6 +132,21 @@ secretInput.addEventListener("input",(e)=>{
     renderTrash();
   }
 });
+
+// Drag functionality
+const header = commandBox.querySelector(".command-header");
+header.addEventListener("mousedown", (e)=>{
+  isDragging = true;
+  offsetX = e.clientX - commandBox.offsetLeft;
+  offsetY = e.clientY - commandBox.offsetTop;
+});
+document.addEventListener("mousemove",(e)=>{
+  if(isDragging){
+    commandBox.style.left = e.clientX - offsetX + "px";
+    commandBox.style.top = e.clientY - offsetY + "px";
+  }
+});
+document.addEventListener("mouseup",()=>{isDragging=false;});
 
 window.finishGame = function(){
   document.querySelectorAll(".screen").forEach(s=>s.classList.remove("active"));
