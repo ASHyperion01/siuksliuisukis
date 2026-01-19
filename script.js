@@ -74,13 +74,14 @@ function renderTrash(){
     };
 
     trash.appendChild(d);
-    setTimeout(()=>d.classList.add("show"), index*150); // animacija po viena
+    setTimeout(()=>d.classList.add("show"), index*150);
   });
 }
 
 window.startGame=function(level){
   document.querySelectorAll(".screen").forEach(s=>s.classList.remove("active"));
   document.getElementById("game").classList.add("active");
+  document.getElementById("level-title").textContent=`Lygis: ${level.charAt(0).toUpperCase()+level.slice(1)}`;
   correct=0;
   selected=null;
   trashItems=generate(level);
