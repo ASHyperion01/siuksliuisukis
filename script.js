@@ -30,20 +30,29 @@ const trashPool = {
     {img:"https://store.hp.com/app/assets/images/uploads/prod/top-3-ways-computer-screen-repair-hero1551994969454.png"},
     {img:"https://www.cnet.com/a/img/resize/f9414cf6d3a45cc61861fd15cc8dadd52d701975/hub/2016/04/22/b9d00103-f05f-426a-9de9-af1f4d189541/recycle-old-cables-chargers.jpg?auto=webp&width=1200"},
     {img:"https://cdn11.bigcommerce.com/s-8vy557m296/images/stencil/original/products/342/4555/30_SMC2266KS_3QR_WEB__24717.1740693309.JPG?c=2"}
+  ],
+  glass: [
+    {img:"https://sansdrinks.com.au/cdn/shop/files/Buy-1920-Wines-Non-Alcoholic-Sparkling-Shiraz-Sansdrinks-37080272339168.jpg?v=1755851767"},
+    {img:"https://assets.manufactum.de/p/067/067835/67835_01.jpg/drinking-glass-jus.jpg"},
+    {img:"https://cdn11.bigcommerce.com/s-xizoo/images/stencil/original/products/1042/4014/ECO12GB__23886.1707332829.jpg"},
+    {img:"https://media.royaldesign.co.uk/6/spiegelau-salute-red-wine-glass-set-of-4-55-cl-13?w=800&quality=80"},
+    {img:"https://cdn.pixabay.com/photo/2017/06/15/23/56/mirror-frame-2407292_640.png"},
+    {img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTxLoLS9gof52cqQ9pAv28_rQ-iA9EdDI3kYQ&s"}
   ]
 };
 
 const levelConfig = {
-  easy:{plastic:3,paper:3,organic:4},
-  medium:{plastic:4,paper:4,organic:4,electronics:2},
-  hard:{plastic:5,paper:5,organic:5,electronics:5}
+  easy:{plastic:3,paper:3,organic:4,glass:2},
+  medium:{plastic:4,paper:4,organic:4,electronics:2,glass:3},
+  hard:{plastic:5,paper:5,organic:5,electronics:5,glass:4}
 };
 
 const bins=[
   {name:"Plastikas",type:"plastic"},
   {name:"Popierius",type:"paper"},
   {name:"Organinės",type:"organic"},
-  {name:"Elektronika",type:"electronics"}
+  {name:"Elektronika",type:"electronics"},
+  {name:"Stiklas",type:"glass"} // pridėta stiklo šiukšlė
 ];
 
 function shuffle(a){return a.sort(()=>Math.random()-0.5)}
@@ -117,6 +126,3 @@ window.resetGame=function(){
   document.querySelectorAll(".screen").forEach(s=>s.classList.remove("active"));
   document.getElementById("start-screen").classList.add("active");
 }
-
-
-
