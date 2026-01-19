@@ -4,20 +4,22 @@ let selected = null;
 let correct = 0;
 let total = 0;
 let mistakes = [];
+let spawnIndex = 0;
+let spawnList = [];
 
 const trashPool = {
-  plastic: ["🛍️","🧴","🥡","🧋","🪥","🧃"],
-  paper: ["📄","📦","📰","📃","📘"],
-  organic: ["🍌","🍎","🥕","🥬","🍉","🥑","🍞"],
-  metal: ["🥫","🔩","🪙","🛠️"],
-  glass: ["🍾","🥛","🥂","🫙"],
-  electronics: ["📱","💻","🖥️","⌨️","🖱️","🔋","🎧","📀"]
+  plastic: ["🛍️","🧴","🥡","🧋","🪥","🧃","🧼","🪣"],
+  paper: ["📄","📦","📰","📘","📕","📗"],
+  organic: ["🍌","🍎","🥕","🥬","🍉","🥑","🍞","🍗","🥚"],
+  metal: ["🥫","🔩","🪙","🛠️","🔧"],
+  glass: ["🍾","🥛","🥂","🫙","🥃"],
+  electronics: ["📱","💻","🖥️","⌨️","🖱️","🔋","🎧","📀","📷"]
 };
 
 const levelConfig = {
-  easy: { plastic:3, paper:3, organic:4 },                // 10
-  medium: { plastic:4, paper:4, organic:4, metal:3 },     // 15
-  hard: { plastic:6, paper:5, organic:6, metal:5, glass:4, electronics:6 } // 32
+  easy: { plastic:4, paper:3, organic:5 },                 // 12
+  medium: { plastic:6, paper:5, organic:6, metal:5 },      // 22
+  hard: { plastic:8, paper:7, organic:9, metal:8, glass:7, electronics:10 } // 49
 };
 
 const bins = [
@@ -29,7 +31,7 @@ const bins = [
   {name:"Elektronika", type:"electronics"}
 ];
 
-function shuffle(arr){ return arr.sort(()=>Math.random()-0.5); }
+function shuffle(a){ return a.sort(()=>Math.random()-0.5); }
 
 function generate(level){
   let out=[];
@@ -41,37 +43,37 @@ function generate(level){
   return shuffle(out);
 }
 
+function spawnNext(){
+  if(spawnIndex >= spawnList.length) return;
+  const item = spawnList[spawnIndex++];
+  const d = document.createElement("div");
+  d.className = "trash-item spawn";
+  d.textContent = item.icon;
+  d.dataset.type = item.type;
+  d.onclick = ()=>{
+    document.querySelectorAll(".trash-item").forEach(t=>t.classList.remove("selected"));
+    d.classList.add("selected");
+    selected = d;
+  };
+  document.getElementById("trash").appendChild(d);
+  setTimeout(spawnNext, 180);
+}
+
 window.startGame = function(level){
   document.querySelectorAll(".screen").forEach(s=>s.classList.remove("active"));
   document.getElementById("game").classList.add("active");
 
-  document.getElementById("level-title").textContent =
-    `Lygis: ${level.toUpperCase()}`;
-
-  const trashEl = document.getElementById("trash");
-  const binEl = document.getElementById("bins");
-  trashEl.innerHTML = "";
-  binEl.innerHTML = "";
+  document.getElementById("trash").innerHTML = "";
+  document.getElementById("bins").innerHTML = "";
+  document.getElementById("level-title").textContent = `Lygis: ${level.toUpperCase()}`;
 
   selected = null;
   correct = 0;
   mistakes = [];
 
-  const items = generate(level);
-  total = items.length;
-
-  items.forEach(i=>{
-    const d = document.createElement("div");
-    d.className = "trash-item";
-    d.textContent = i.icon;
-    d.dataset.type = i.type;
-    d.onclick = ()=>{
-      document.querySelectorAll(".trash-item").forEach(t=>t.classList.remove("selected"));
-      d.classList.add("selected");
-      selected = d;
-    };
-    trashEl.appendChild(d);
-  });
+  spawnIndex = 0;
+  spawnList = generate(level);
+  total = spawnList.length;
 
   bins.forEach(b=>{
     if(!levelConfig[level][b.type]) return;
@@ -80,7 +82,6 @@ window.startGame = function(level){
     d.textContent = b.name;
     d.onclick = ()=>{
       if(!selected) return;
-
       selected.classList.add("removed");
 
       if(selected.dataset.type === b.type){
@@ -94,8 +95,10 @@ window.startGame = function(level){
       setTimeout(()=>selected.remove(),300);
       selected = null;
     };
-    binEl.appendChild(d);
+    document.getElementById("bins").appendChild(d);
   });
+
+  spawnNext();
 }
 
 window.finishGame = function(){
@@ -103,7 +106,7 @@ window.finishGame = function(){
   document.getElementById("result").classList.add("active");
 
   let txt = `Teisingai: ${correct} / ${total}\n\n`;
-  txt += mistakes.length ? "Klaidos:\n"+mistakes.join("\n") : "Puikiai! 🎉";
+  txt += mistakes.length ? "Klaidos:\n" + mistakes.join("\n") : "Puikiai! 🌟";
   document.getElementById("score").textContent = txt;
 }
 
