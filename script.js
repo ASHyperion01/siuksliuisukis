@@ -24,7 +24,7 @@ const trashPool = {
   paper:[
     {img:"https://static.vecteezy.com/system/resources/thumbnails/011/643/706/small/business-newspaper-isolated-on-white-background-daily-newspaper-mock-up-concept-photo.jpg"},
     {img:"https://sadlers.co.uk/cdn/shop/files/AJ728A.jpg?v=1753784030&width=800"},
-    {img:"https://sugarpaper.com/cdn/shop/files/NBK75_LargeSpiralNotebook_Black_Cover.jpg"},
+    {img:"https://sugarpaper.com/cdn/shop/files/NBK75_LargeSpiralNotebook_Black_Cover.jpg?v=1690000000"},
     {img:"https://images.squarespace-cdn.com/content/v1/5d3178f5c443690001caace9/1678859744004-BOMG3CF0079ZV2LIDL3P/KB-PA-3030.jpg"}
   ],
   organic:[
@@ -42,7 +42,7 @@ const trashPool = {
   ],
   glass:[
     {img:"https://sansdrinks.com.au/cdn/shop/files/Buy-1920-Wines-Non-Alcoholic-Sparkling-Shiraz-Sansdrinks-37080272339168.jpg?v=1755851767"},
-    {img:"https://assets.manufactum.de/p/067/067835/67835_01.jpg/drinking-glass-jus.jpg"},
+    {img:"https://assets.manufactum.de/p/067/067835/67835_01.jpg"},
     {img:"https://cdn11.bigcommerce.com/s-xizoo/images/stencil/original/products/1042/4014/ECO12GB__23886.1707332829.jpg"},
     {img:"https://media.royaldesign.co.uk/6/spiegelau-salute-red-wine-glass-set-of-4-55-cl-13?w=800"}
   ]
@@ -75,7 +75,10 @@ function generate(level){
 function showTrash(){
   const imgEl = document.getElementById("trash-img");
   imgEl.src = trashItems[currentIndex].img;
-  imgEl.style.border="3px solid transparent";
+  imgEl.style.width = "400px";
+  imgEl.style.height = "400px";
+  imgEl.style.objectFit = "cover";
+  imgEl.style.border = "3px solid transparent";
 }
 
 window.startGame = function(level){
@@ -88,8 +91,6 @@ window.startGame = function(level){
   correct = 0;
   history = [];
   mistakes = [];
-
-  document.getElementById("level-title").textContent=`Lygis: ${level.charAt(0).toUpperCase()+level.slice(1)}`;
 
   const binsEl=document.getElementById("bins");
   binsEl.innerHTML="";
@@ -106,30 +107,27 @@ window.startGame = function(level){
 };
 
 function chooseBin(type){
-  // pažymime pasirinkimą vizualiai
-  const imgEl = document.getElementById("trash-img");
-  if(trashItems[currentIndex].type===type){
-    imgEl.style.border="3px solid #2ecc71"; // žalia
-    correct++;
-  } else {
-    imgEl.style.border="3px solid #e74c3c"; // raudona
-    mistakes.push({img:trashItems[currentIndex].img, correct:trashItems[currentIndex].type});
-  }
-
   history.push(currentIndex);
 
-  setTimeout(()=>{
-    currentIndex++;
-    if(currentIndex>=trashItems.length){
-      finishGame();
-    } else {
-      showTrash();
-    }
-  }, 500); // pusė sekundės parodyti žalią/raudoną
+  if(trashItems[currentIndex].type === type){
+    correct++;
+  } else {
+    mistakes.push({
+      img: trashItems[currentIndex].img,
+      correct: trashItems[currentIndex].type
+    });
+  }
+
+  currentIndex++;
+  if(currentIndex >= trashItems.length){
+    finishGame();
+  } else {
+    showTrash();
+  }
 }
 
 window.previousTrash = function(){
-  if(history.length===0) return;
+  if(history.length === 0) return;
   currentIndex = history.pop();
   showTrash();
 };
@@ -142,7 +140,7 @@ function finishGame(){
   const mistakesDiv = document.getElementById("mistakes");
   mistakesDiv.innerHTML = "";
 
-  if(correct===total){
+  if(correct === total){
     document.getElementById("result-title").textContent="Šaunuolis! 🎉";
     startConfetti();
   } else {
@@ -158,21 +156,21 @@ function finishGame(){
 window.resetGame = function(){
   document.querySelectorAll(".screen").forEach(s=>s.classList.remove("active"));
   document.getElementById("start-screen").classList.add("active");
-  trashItems=[];
-  currentIndex=0;
-  correct=0;
-  total=0;
-  history=[];
-  mistakes=[];
+
+  trashItems = [];
+  currentIndex = 0;
+  correct = 0;
+  total = 0;
+  history = [];
+  mistakes = [];
 };
 
-/* ------- confetti 5s -------- */
+/* ------- simple 5s confetti -------- */
 function startConfetti(){
   const canvas = document.getElementById("confetti");
   const ctx = canvas.getContext("2d");
   canvas.width = window.innerWidth;
   canvas.height = window.innerHeight;
-
   let particles=[];
   for(let i=0;i<200;i++){
     particles.push({
@@ -180,30 +178,29 @@ function startConfetti(){
       y: Math.random()*canvas.height,
       r: Math.random()*6+4,
       d: Math.random()*20+10,
-      color: `hsl(${Math.random()*360},100%,50%)`,
+      color: `hsl(${Math.random()*360}, 100%, 50%)`,
       tilt: Math.random()*10-5
     });
   }
-
-  let angle=0;
-  let startTime=Date.now();
-
+  let angle = 0;
+  let start = Date.now();
   function draw(){
-    let elapsed = Date.now()-startTime;
-    if(elapsed>5000){ctx.clearRect(0,0,canvas.width,canvas.height); return;}
-
     ctx.clearRect(0,0,canvas.width,canvas.height);
     particles.forEach(p=>{
       ctx.beginPath();
-      ctx.fillStyle=p.color;
+      ctx.fillStyle = p.color;
       ctx.fillRect(p.x,p.y,p.r,p.r);
       ctx.closePath();
-      p.x+=Math.sin(angle)*2;
-      p.y+=Math.cos(angle+p.d)+1+p.r/2;
+      p.x += Math.sin(angle)*2;
+      p.y += (Math.cos(angle+p.d)+1+p.r/2);
       if(p.y>canvas.height){p.y=-10;p.x=Math.random()*canvas.width;}
     });
     angle+=0.02;
-    requestAnimationFrame(draw);
+    if(Date.now()-start<5000){ // 5s
+      requestAnimationFrame(draw);
+    } else {
+      ctx.clearRect(0,0,canvas.width,canvas.height);
+    }
   }
   draw();
 }
