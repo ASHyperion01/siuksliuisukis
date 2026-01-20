@@ -2,11 +2,13 @@
 <html lang="lt">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>🌿 Šiukšlių iššūkis</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
+
+<canvas id="confetti" style="position:fixed;top:0;left:0;pointer-events:none;"></canvas>
 
 <!-- START SCREEN -->
 <div id="start-screen" class="screen active">
@@ -14,9 +16,18 @@
     <h1>🌿 Šiukšlių iššūkis</h1>
     <p>Pasirink lygį</p>
     <div class="level-cards">
-      <button onclick="startGame('easy')">Lengvas</button>
-      <button onclick="startGame('medium')">Vidutinis</button>
-      <button onclick="startGame('hard')">Sunkus</button>
+      <div class="level-card" onclick="startGame('easy')">
+        <h3>Lengvas</h3>
+        <p>Pradedantiesiems</p>
+      </div>
+      <div class="level-card" onclick="startGame('medium')">
+        <h3>Vidutinis</h3>
+        <p>Iššūkis</p>
+      </div>
+      <div class="level-card" onclick="startGame('hard')">
+        <h3>Sunkus</h3>
+        <p>Profi lygis</p>
+      </div>
     </div>
     <div class="footer-text">Sukūrė 7c ŽMI grupė</div>
   </div>
@@ -25,14 +36,12 @@
 <!-- GAME SCREEN -->
 <div id="game" class="screen">
   <h2 id="level-title"></h2>
-  <div id="trash-container">
-    <img id="trash-img" src="" alt="Šiukšlė" class="trash-item-img">
+  <div id="trash">
+    <img id="trash-img" src="" alt="šiukšlė">
   </div>
   <div id="bins" class="bin-grid"></div>
-  <div class="game-buttons">
-    <button onclick="previousTrash()">⏪ Ankstesnė</button>
-    <button onclick="finishGame()">Baigti žaidimą</button>
-  </div>
+  <button class="finish" onclick="finishGame()">Baigti žaidimą</button>
+  <button class="rewind" onclick="previousTrash()">↩ Ankstesnė</button>
 </div>
 
 <!-- RESULT SCREEN -->
@@ -44,8 +53,6 @@
     <button class="restart" onclick="resetGame()">🔄 Žaisti dar kartą</button>
   </div>
 </div>
-
-<canvas id="confetti"></canvas>
 
 <script src="script.js"></script>
 </body>
