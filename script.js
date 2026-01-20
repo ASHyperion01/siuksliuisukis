@@ -38,7 +38,7 @@ const trashPool = {
     {img:"https://img.freepik.com/premium-vector/broken-phone_105325-508.jpg"},
     {img:"https://cdn11.bigcommerce.com/s-a8bv6/images/stencil/1280x1280/products/426/288/Duracell_C__55045.1398448564.jpg"},
     {img:"https://store.hp.com/app/assets/images/uploads/prod/top-3-ways-computer-screen-repair-hero1551994969454.png"},
-    {img:"https://www.cnet.com/a/img/resize/f9414cf6d3a45cc61861fd15cc8dadd52d701975/hub/2016/04/22/b9d00103-f05f-426a-9de9-af1f4d189541/recycle-old-cables-chargers.jpg"}
+    {img:"https://zmscable.es/wp-content/uploads/2023/11/cables-trifasicos-hilos-1024x683.jpg"}
   ],
   glass:[
     {img:"https://sansdrinks.com.au/cdn/shop/files/Buy-1920-Wines-Non-Alcoholic-Sparkling-Shiraz-Sansdrinks-37080272339168.jpg?v=1755851767"},
@@ -187,3 +187,4 @@ function startConfetti(){
   }
   draw();
 }
+
