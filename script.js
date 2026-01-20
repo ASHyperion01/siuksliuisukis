@@ -28,7 +28,7 @@ const trashPool = {
     {img:"https://allcitycandy.com/cdn/shop/products/a5214c3a-8860-4d09-aab4-70524e7a0921.8ccd57d5e98c67f93544c8a059fe15b9.jpg?v=1632837195"}
   ],
   organic:[
-    {img:"https://media.istockphoto.com/id/146805514/photo/banana-skin.jpg"},
+    {img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTLWh-E-5rCitwZiTaKzesMB6kupUh0TRu1FQ&s"},
     {img:"https://thumbs.dreamstime.com/b/eaten-apple-close-up-white-background-isolated-136817997.jpg"},
     {img:"https://www.allthatgrows.in/cdn/shop/products/Carrot-Orange.jpg?v=1598079671"},
     {img:"https://www.veggipedia.nl/_next/image?url=https://veggipedia-cms.production.taks.zooma.cloud/assets/Uploads/Products/Aardappel-groenten-Veggipedia.png"},
@@ -187,4 +187,5 @@ function startConfetti(){
   }
   draw();
 }
+
 
