@@ -14,11 +14,37 @@ const explanations = {
 };
 
 const trashPool = {
-  plastic:[ {img:"https://allcitycandy.com/cdn/shop/products/a5214c3a-8860-4d09-aab4-70524e7a0921.8ccd57d5e98c67f93544c8a059fe15b9.jpg?v=1632837195"}, {img:"https://naturaliosidejos.lt/1604-large_default/perfumed-liquid-soap-500ml-tobacco-oak.jpg"}, {img:"https://m.media-amazon.com/images/I/51zMzLXAsqL.jpg"}, {img:"https://upload.wikimedia.org/wikipedia/commons/thumb/a/a2/Bubble_Tea.png/250px-Bubble_Tea.png"}, {img:"https://5.imimg.com/data5/CJ/LM/MM/SELLER-47837534/plastic-tooth-brush.jpg"}],
-  paper:[ {img:"https://static.vecteezy.com/system/resources/thumbnails/011/643/706/small/business-newspaper-isolated-on-white-background-daily-newspaper-mock-up-concept-photo.jpg"}, {img:"https://sadlers.co.uk/cdn/shop/files/AJ728A.jpg?v=1753784030&width=800"}, {img:"https://sugarpaper.com/cdn/shop/files/NBK75_LargeSpiralNotebook_Black_Cover.jpg"}, {img:"https://images.squarespace-cdn.com/content/v1/5d3178f5c443690001caace9/1678859744004-BOMG3CF0079ZV2LIDL3P/KB-PA-3030.jpg"}],
-  organic:[ {img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTLWh-E-5rCitwZiTaKzesMB6kupUh0TRu1FQ&s"}, {img:"https://thumbs.dreamstime.com/b/eaten-apple-close-up-white-background-isolated-136817997.jpg"}, {img:"https://www.allthatgrows.in/cdn/shop/products/Carrot-Orange.jpg?v=1598079671"}, {img:"https://www.veggipedia.nl/_next/image?url=https://veggipedia-cms.production.taks.zooma.cloud/assets/Uploads/Products/Aardappel-groenten-Veggipedia.png"}, {img:"https://www.andy-cooks.com/cdn/shop/articles/20240928015406-andy-20cooks-20-20delicious-20roast-20chicken-20with-20butter.jpg?v=1727924455"}],
-  electronics:[ {img:"https://img.freepik.com/premium-vector/broken-phone_105325-508.jpg"}, {img:"https://cdn11.bigcommerce.com/s-a8bv6/images/stencil/1280x1280/products/426/288/Duracell_C__55045.1398448564.jpg"}, {img:"https://store.hp.com/app/assets/images/uploads/prod/top-3-ways-computer-screen-repair-hero1551994969454.png"}, {img:"https://zmscable.es/wp-content/uploads/2023/11/cables-trifasicos-hilos-1024x683.jpg"}],
-  glass:[ {img:"https://sansdrinks.com.au/cdn/shop/files/Buy-1920-Wines-Non-Alcoholic-Sparkling-Shiraz-Sansdrinks-37080272339168.jpg?v=1755851767"}, {img:"https://assets.manufactum.de/p/067/067835/67835_01.jpg/drinking-glass-jus.jpg"}, {img:"https://cdn11.bigcommerce.com/s-xizoo/images/stencil/original/products/1042/4014/ECO12GB__23886.1707332829.jpg"}, {img:"https://media.royaldesign.co.uk/6/spiegelau-salute-red-wine-glass-set-of-4-55-cl-13?w=800"}]
+  plastic:[
+    {img:"https://allcitycandy.com/cdn/shop/products/a5214c3a-8860-4d09-aab4-70524e7a0921.8ccd57d5e98c67f93544c8a059fe15b9.jpg?v=1632837195"},
+    {img:"https://naturaliosidejos.lt/1604-large_default/perfumed-liquid-soap-500ml-tobacco-oak.jpg"},
+    {img:"https://m.media-amazon.com/images/I/51zMzLXAsqL.jpg"},
+    {img:"https://upload.wikimedia.org/wikipedia/commons/thumb/a/a2/Bubble_Tea.png/250px-Bubble_Tea.png"},
+    {img:"https://5.imimg.com/data5/CJ/LM/MM/SELLER-47837534/plastic-tooth-brush.jpg"}
+  ],
+  paper:[
+    {img:"https://static.vecteezy.com/system/resources/thumbnails/011/643/706/small/business-newspaper-isolated-on-white-background-daily-newspaper-mock-up-concept-photo.jpg"},
+    {img:"https://sadlers.co.uk/cdn/shop/files/AJ728A.jpg?v=1753784030&width=800"},
+    {img:"https://sugarpaper.com/cdn/shop/files/NBK75_LargeSpiralNotebook_Black_Cover.jpg"},
+    {img:"https://images.squarespace-cdn.com/content/v1/5d3178f5c443690001caace9/1678859744004-BOMG3CF0079ZV2LIDL3P/KB-PA-3030.jpg"}
+  ],
+  organic:[
+    {img:"https://upload.wikimedia.org/wikipedia/commons/6/60/Patates.jpg"},
+    {img:"https://thumbs.dreamstime.com/b/eaten-apple-close-up-white-background-isolated-136817997.jpg"},
+    {img:"https://www.allthatgrows.in/cdn/shop/products/Carrot-Orange.jpg?v=1598079671"},
+    {img:"https://www.andy-cooks.com/cdn/shop/articles/20240928015406-andy-20cooks-20-20delicious-20roast-20chicken-20with-20butter.jpg?v=1727924455"}
+  ],
+  electronics:[
+    {img:"https://img.freepik.com/premium-vector/broken-phone_105325-508.jpg"},
+    {img:"https://cdn11.bigcommerce.com/s-a8bv6/images/stencil/1280x1280/products/426/288/Duracell_C__55045.1398448564.jpg"},
+    {img:"https://store.hp.com/app/assets/images/uploads/prod/top-3-ways-computer-screen-repair-hero1551994969454.png"},
+    {img:"https://zmscable.es/wp-content/uploads/2023/11/cables-trifasicos-hilos-1024x683.jpg"}
+  ],
+  glass:[
+    {img:"https://sansdrinks.com.au/cdn/shop/files/Buy-1920-Wines-Non-Alcoholic-Sparkling-Shiraz-Sansdrinks-37080272339168.jpg?v=1755851767"},
+    {img:"https://assets.manufactum.de/p/067/067835/67835_01.jpg/drinking-glass-jus.jpg"},
+    {img:"https://cdn11.bigcommerce.com/s-xizoo/images/stencil/original/products/1042/4014/ECO12GB__23886.1707332829.jpg"},
+    {img:"https://media.royaldesign.co.uk/6/spiegelau-salute-red-wine-glass-set-of-4-55-cl-13?w=800&quality=80"}
+  ]
 };
 
 const levelConfig = {
@@ -46,8 +72,7 @@ function generate(level){
 }
 
 function showTrash(){
-  const img = document.getElementById("trash-img");
-  img.src = trashItems[currentIndex].img;
+  document.getElementById("trash-img").src = trashItems[currentIndex].img;
 }
 
 window.startGame = function(level){
@@ -127,12 +152,13 @@ window.resetGame = function(){
   document.getElementById("start-screen").classList.add("active");
 };
 
-/* ------- simple confetti -------- */
+/* ------- confetti 5 sekundžių -------- */
 function startConfetti(){
   const canvas = document.getElementById("confetti");
   const ctx = canvas.getContext("2d");
   canvas.width = window.innerWidth;
   canvas.height = window.innerHeight;
+
   let particles=[];
   for(let i=0;i<200;i++){
     particles.push({
@@ -144,8 +170,17 @@ function startConfetti(){
       tilt: Math.random()*10-5
     });
   }
-  let angle = 0;
+
+  let angle=0;
+  let startTime = Date.now();
+
   function draw(){
+    const elapsed = Date.now() - startTime;
+    if(elapsed > 5000){
+      ctx.clearRect(0,0,canvas.width,canvas.height);
+      return;
+    }
+
     ctx.clearRect(0,0,canvas.width,canvas.height);
     particles.forEach(p=>{
       ctx.beginPath();
@@ -159,5 +194,6 @@ function startConfetti(){
     angle+=0.02;
     requestAnimationFrame(draw);
   }
+
   draw();
 }
