@@ -1,86 +1,54 @@
-* {
-  box-sizing: border-box;
-  font-family: Arial, sans-serif;
-}
+* { box-sizing: border-box; font-family: Arial,sans-serif; }
 
 body {
-  margin: 0;
-  background: #0f2d1e;
-  color: white;
-  text-align: center;
+  margin:0;
+  background:#0f3d2e;
+  color:white;
+  text-align:center;
 }
 
 .screen {
-  display: none;
-  padding: 30px;
+  display:none;
+  padding:20px;
+}
+.screen.active { display:block; }
+
+button {
+  padding:14px;
+  margin:8px;
+  border:none;
+  border-radius:12px;
+  background:#2ecc71;
+  color:white;
+  font-size:16px;
+  cursor:pointer;
 }
 
-.screen.active {
-  display: block;
-}
-
-h1, h2 {
-  margin-bottom: 20px;
-}
-
-.level-buttons button,
-.rewind,
-#bins .bin,
-#result button {
-  padding: 14px 22px;
-  margin: 8px;
-  font-size: 16px;
-  border: none;
-  border-radius: 10px;
-  cursor: pointer;
-}
-
-.level-buttons button {
-  background: #2ecc71;
-  color: #063d22;
-  font-weight: bold;
-}
-
-.level-buttons button:hover {
-  background: #27ae60;
-}
-
-#trash-area {
-  margin: 30px auto;
-}
-
+#trash-area { margin:20px auto; }
 #trash-img {
-  max-width: 400px;
-  max-height: 400px;
-  border-radius: 12px;
-  background: white;
-  padding: 10px;
+  max-width:90%;
+  max-height:400px;
+  border-radius:20px;
+  background:white;
 }
 
 #bins {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  margin-top: 20px;
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(120px,1fr));
+  gap:10px;
+  margin-top:20px;
 }
 
-.bin {
-  background: #1abc9c;
-  color: #063d22;
-  font-weight: bold;
-  min-width: 140px;
-}
+.bin { background:#27ae60; padding:14px; border-radius:14px; font-weight:bold; cursor:pointer; }
+.bin:hover { transform:scale(1.05); transition:0.2s; }
 
-.bin:hover {
-  background: #16a085;
-}
+.back { background:#3498db; }
 
-.rewind {
-  background: #f39c12;
-  color: black;
-  margin-top: 20px;
-}
+#mistakes { text-align:left; margin-top:15px; }
 
-.rewind:hover {
-  background: #e67e22;
+canvas { position:fixed; inset:0; pointer-events:none; }
+
+@media(max-width:500px){
+  #trash-img { max-height:300px; }
+  button, .bin { font-size:14px; padding:10px; }
 }
