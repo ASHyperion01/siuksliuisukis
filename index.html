@@ -8,8 +8,6 @@
 </head>
 <body>
 
-<canvas id="confetti" style="position:fixed;top:0;left:0;pointer-events:none;"></canvas>
-
 <!-- START SCREEN -->
 <div id="start-screen" class="screen active">
   <div class="menu-overlay">
@@ -36,12 +34,10 @@
 <!-- GAME SCREEN -->
 <div id="game" class="screen">
   <h2 id="level-title"></h2>
-  <div id="trash">
-    <img id="trash-img" src="" alt="šiukšlė">
-  </div>
+  <img id="trash-img" src="" alt="Šiukšlė">
   <div id="bins" class="bin-grid"></div>
   <button class="finish" onclick="finishGame()">Baigti žaidimą</button>
-  <button class="rewind" onclick="previousTrash()">↩ Ankstesnė</button>
+  <button class="rewind" onclick="previousTrash()">⏪ Ankstesnė</button>
 </div>
 
 <!-- RESULT SCREEN -->
@@ -54,6 +50,7 @@
   </div>
 </div>
 
+<canvas id="confetti"></canvas>
 <script src="script.js"></script>
 </body>
 </html>
