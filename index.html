@@ -11,27 +11,23 @@
 <!-- START SCREEN -->
 <div id="start-screen" class="screen active">
   <div class="menu-overlay">
-    <h1>🌿 Šiukšlių iššūkis 🎉</h1>
+    <h1>🌿 Šiukšlių iššūkis ♻️</h1>
     <p>Pasirink lygį</p>
     <div class="level-cards">
       <button onclick="startGame('easy')">Easy</button>
       <button onclick="startGame('medium')">Medium</button>
       <button onclick="startGame('hard')">Hard</button>
     </div>
+    <div class="footer-text">Atliko 7c klasės ŽMI grupė</div>
   </div>
 </div>
 
 <!-- GAME SCREEN -->
 <div id="game" class="screen">
   <h2 id="level-title"></h2>
-  <div class="trash-container">
-    <img id="trash-img" src="" alt="Šiukšlė">
-  </div>
+  <div id="trash" class="trash-grid"></div>
   <div id="bins" class="bin-grid"></div>
-  <div class="game-controls">
-    <button onclick="previousTrash()">⬅️ Ankstesnė</button>
-    <button onclick="finishGame()">Baigti žaidimą</button>
-  </div>
+  <button class="finish" onclick="finishGame()">Baigti žaidimą</button>
 </div>
 
 <!-- RESULT SCREEN -->
@@ -40,10 +36,12 @@
     <h2 id="result-title"></h2>
     <pre id="score"></pre>
     <div id="mistakes"></div>
-    <canvas id="confetti"></canvas>
     <button class="restart" onclick="resetGame()">🔄 Žaisti dar kartą</button>
   </div>
 </div>
+
+<!-- Confetti canvas -->
+<canvas id="confetti"></canvas>
 
 <script src="script.js"></script>
 </body>
