@@ -1,3 +1,4 @@
+/* BODY */
 body{
   margin:0;
   font-family:Arial,sans-serif;
@@ -6,7 +7,7 @@ body{
   text-align:center;
 }
 
-/* SCREEN */
+/* SCREEN SETUP */
 .screen{
   display:none;
   min-height:100vh;
@@ -17,7 +18,7 @@ body{
 }
 .screen.active{display:flex}
 
-/* MENU */
+/* MENU OVERLAY */
 .menu-overlay{
   background:#145a32;
   padding:28px;
@@ -30,6 +31,8 @@ body{
   gap:14px;
   margin:auto;
 }
+
+/* LEVEL BUTTONS */
 .level-cards{
   display:flex;
   flex-direction:column;
@@ -39,14 +42,20 @@ body{
   padding:14px 28px;
   border:none;
   border-radius:16px;
-  background:#2ecc71;
+  background:#27ae60;
   color:white;
   font-weight:bold;
   font-size:16px;
   cursor:pointer;
   transition:all 0.2s ease;
 }
-.level-cards button:hover{background:#27ae60; transform:scale(1.05);}
+.level-cards button:hover,
+.level-cards button:focus{
+  background:#2ecc71;
+  transform:scale(1.05);
+}
+
+/* FOOTER */
 .footer-text{
   color:white;
   font-size:12px;
@@ -54,7 +63,7 @@ body{
   opacity:0.7;
 }
 
-/* GAME */
+/* TRASH IMAGE */
 #trash-img{
   display:block;
   margin: 20px auto;
@@ -64,22 +73,24 @@ body{
   width:400px;
   height:400px;
   object-fit:cover;
-  border:3px solid transparent;
+  border: 3px solid transparent;
 }
 #trash-img:hover{
   transform:scale(1.05);
   box-shadow:0 8px 20px rgba(0,0,0,0.5);
 }
 
-.bin-grid{
+/* BIN BUTTONS */
+#bins{
   display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(80px,1fr));
+  grid-template-columns:repeat(auto-fit,minmax(90px,1fr));
   gap:10px;
   max-width:420px;
   margin-top:10px;
 }
 .bin{
-  background:#2ecc71;
+  background:#27ae60;
+  color:white;
   border-radius:14px;
   height:72px;
   display:flex;
@@ -88,11 +99,31 @@ body{
   font-size:13px;
   font-weight:bold;
   cursor:pointer;
-  transition: all 0.2s ease;
+  transition:all 0.2s ease;
 }
-.bin:hover{transform:scale(1.05);}
+.bin:hover,
+.bin:focus{
+  background:#2ecc71;
+  transform:scale(1.05);
+}
 
-/* RESULT */
+/* GAME BUTTONS */
+.finish,.restart{
+  margin-top:12px;
+  padding:10px 22px;
+  border:none;
+  border-radius:12px;
+  background:#2ecc71;
+  color:white;
+  font-weight:bold;
+  cursor:pointer;
+  transition:all 0.2s ease;
+}
+.finish:hover,.restart:hover{
+  background:#27ae60;
+}
+
+/* RESULT OVERLAY */
 #result{
   position:fixed;
   inset:0;
@@ -107,8 +138,12 @@ body{
   padding:28px;
   border-radius:20px;
 }
-#mistakes p img{
-  border-radius:8px;
+
+/* MISTAKES LIST */
+#mistakes p{
+  margin:6px 0;
+  font-size:14px;
+  text-align:left;
 }
 
 /* CONFETTI */
@@ -117,12 +152,15 @@ body{
   top:0;
   left:0;
   pointer-events:none;
-  z-index:1000;
+  z-index:9999;
 }
 
-/* PHONE */
+/* PHONE RESPONSIVE */
 @media(max-width:500px){
-  #trash-img{width:300px;height:300px;}
+  #trash-img{
+    width:300px;
+    height:300px;
+  }
   .bin{height:60px;font-size:11px;}
   .level-cards button{padding:10px 20px;font-size:14px;}
 }
