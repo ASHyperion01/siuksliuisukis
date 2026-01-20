@@ -2,50 +2,38 @@
 <html lang="lt">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>🌿 Šiukšlių iššūkis</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-<!-- START SCREEN -->
 <div id="start-screen" class="screen active">
   <div class="menu-overlay">
     <h1>🌿 Šiukšlių iššūkis</h1>
     <p>Pasirink lygį</p>
     <div class="level-cards">
-      <button onclick="startGame('easy')">Lengvas</button>
-      <button onclick="startGame('medium')">Vidutinis</button>
-      <button onclick="startGame('hard')">Sunkus</button>
+      <button onclick="startGame('easy')">Easy</button>
+      <button onclick="startGame('medium')">Medium</button>
+      <button onclick="startGame('hard')">Hard</button>
     </div>
-    <div class="footer-text">Sukūrė 7c ŽMI grupė</div>
   </div>
 </div>
 
-<!-- GAME SCREEN -->
 <div id="game" class="screen">
   <h2 id="level-title"></h2>
-  <div id="trash-container">
-    <img id="trash-img" src="" alt="Siukšlė">
-  </div>
-  <div id="bins"></div>
-  <div class="controls">
-    <button onclick="previousTrash()">⏪ Ankstesnė</button>
-    <button onclick="finishGame()">Baigti žaidimą</button>
-  </div>
+  <div id="trash" class="trash-grid"></div>
+  <div id="bins" class="bin-grid"></div>
+  <button class="finish" onclick="finishGame()">Baigti žaidimą</button>
 </div>
 
-<!-- RESULT SCREEN -->
 <div id="result" class="screen">
   <div class="result-overlay">
-    <h2 id="result-title"></h2>
-    <p id="score"></p>
-    <div id="mistakes"></div>
-    <button onclick="resetGame()">🔄 Žaisti dar kartą</button>
+    <h2 id="result-text"></h2>
+    <div id="confetti"></div>
+    <button onclick="resetGame()">Žaisti dar kartą</button>
   </div>
 </div>
-
-<canvas id="confetti"></canvas>
 
 <script src="script.js"></script>
 </body>
