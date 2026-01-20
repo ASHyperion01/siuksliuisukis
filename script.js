@@ -32,7 +32,7 @@ const trashPool = {
     {img:"https://thumbs.dreamstime.com/b/eaten-apple-close-up-white-background-isolated-136817997.jpg"},
     {img:"https://www.allthatgrows.in/cdn/shop/products/Carrot-Orange.jpg?v=1598079671"},
     {img:"https://www.veggipedia.nl/_next/image?url=https://veggipedia-cms.production.taks.zooma.cloud/assets/Uploads/Products/Aardappel-groenten-Veggipedia.png"},
-    {img:"https://media.istockphoto.com/id/172205213/photo/chicken-drumstick-with-bite-missing.jpg"}
+    {img:"https://www.andy-cooks.com/cdn/shop/articles/20240928015406-andy-20cooks-20-20delicious-20roast-20chicken-20with-20butter.jpg?v=1727924455"}
   ],
   electronics:[
     {img:"https://img.freepik.com/premium-vector/broken-phone_105325-508.jpg"},
@@ -187,5 +187,6 @@ function startConfetti(){
   }
   draw();
 }
+
 
 
