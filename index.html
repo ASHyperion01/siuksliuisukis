@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>♻️ Šiukšlių rūšiavimo žaidimas</title>
+  <title>🌿 Šiukšlių iššūkis</title>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -11,12 +11,12 @@
 <!-- START SCREEN -->
 <div id="start-screen" class="screen active">
   <div class="menu-overlay">
-    <h1>♻️ Šiukšlių rūšiavimo žaidimas</h1>
-    <p>Pasirink lygį:</p>
+    <h1>🌿 Šiukšlių iššūkis</h1>
+    <p>Pasirink lygį</p>
     <div class="level-cards">
-      <button onclick="startGame('easy')" class="level-btn">Lengvas</button>
-      <button onclick="startGame('medium')" class="level-btn">Vidutinis</button>
-      <button onclick="startGame('hard')" class="level-btn">Sunkus</button>
+      <button onclick="startGame('easy')">Lengvas</button>
+      <button onclick="startGame('medium')">Vidutinis</button>
+      <button onclick="startGame('hard')">Sunkus</button>
     </div>
     <div class="footer-text">Sukūrė 7c ŽMI grupė</div>
   </div>
@@ -25,28 +25,28 @@
 <!-- GAME SCREEN -->
 <div id="game" class="screen">
   <h2 id="level-title"></h2>
-
-  <div id="trash-area">
-    <img id="trash-img" src="" alt="šiuklė">
+  <div id="trash-container">
+    <img id="trash-img" src="" alt="Šiukšlė" class="trash-item-img">
   </div>
-
-  <div id="bins"></div>
-
+  <div id="bins" class="bin-grid"></div>
   <div class="game-buttons">
-    <button onclick="previousTrash()">⏮ Atgal</button>
-    <button onclick="finishGame()">🏁 Baigti žaidimą</button>
+    <button onclick="previousTrash()">⏪ Ankstesnė</button>
+    <button onclick="finishGame()">Baigti žaidimą</button>
   </div>
 </div>
 
 <!-- RESULT SCREEN -->
 <div id="result" class="screen">
-  <h2 id="result-title"></h2>
-  <p id="score"></p>
-  <div id="mistakes"></div>
-  <button onclick="resetGame()">🔄 Žaisti dar kartą</button>
+  <div class="result-overlay">
+    <h2 id="result-title">Rezultatas</h2>
+    <pre id="score"></pre>
+    <div id="mistakes"></div>
+    <button class="restart" onclick="resetGame()">🔄 Žaisti dar kartą</button>
+  </div>
 </div>
 
 <canvas id="confetti"></canvas>
+
 <script src="script.js"></script>
 </body>
 </html>
