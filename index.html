@@ -1,48 +1,46 @@
 <!DOCTYPE html>
 <html lang="lt">
 <head>
-<meta charset="UTF-8">
-<title>🌿 Šiukšlių iššūkis</title>
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8">
+  <title>🌿 Šiukšlių iššūkis</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-<!-- Start Screen -->
+<!-- START SCREEN -->
 <div id="start-screen" class="screen active">
   <div class="menu-overlay">
-    <h1>🌿 Šiukšlių iššūkis ♻️</h1>
+    <h1>🌿 Šiukšlių iššūkis</h1>
     <p>Pasirink lygį</p>
     <div class="level-cards">
-      <button onclick="startGame('easy')">Easy</button>
-      <button onclick="startGame('medium')">Medium</button>
-      <button onclick="startGame('hard')">Hard</button>
+      <button class="level-btn" onclick="startGame('easy')">Easy</button>
+      <button class="level-btn" onclick="startGame('medium')">Medium</button>
+      <button class="level-btn" onclick="startGame('hard')">Hard</button>
     </div>
     <div class="footer-text">Atliko 7c klasės ŽMI grupė</div>
   </div>
 </div>
 
-<!-- Game Screen -->
+<!-- GAME SCREEN -->
 <div id="game" class="screen">
   <h2 id="level-title"></h2>
   <div id="trash" class="trash-grid"></div>
   <div id="bins" class="bin-grid"></div>
-  <button class="finish" onclick="finishGame()">Baigti žaidimą</button>
+  <button class="finish-btn" onclick="finishGame()">Baigti žaidimą</button>
 </div>
 
-<!-- Result Screen -->
+<!-- RESULT SCREEN -->
 <div id="result" class="screen">
   <div class="result-overlay">
-    <h2 id="result-title"></h2>
+    <h2 id="result-title">Rezultatas</h2>
     <pre id="score"></pre>
     <div id="mistakes"></div>
-    <button class="restart" onclick="resetGame()">🔄 Žaisti dar kartą</button>
+    <button class="restart-btn" onclick="resetGame()">🔄 Žaisti dar kartą</button>
   </div>
 </div>
 
-<!-- Confetti Canvas -->
 <canvas id="confetti"></canvas>
-
 <script src="script.js"></script>
 </body>
 </html>
