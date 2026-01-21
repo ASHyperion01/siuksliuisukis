@@ -76,14 +76,12 @@ const bins = [
 
 function shuffle(a){return a.sort(()=>Math.random()-0.5);}
 
-// --- GENERATE TRASH ---
+// --- GENERATE UNIQUE TRASH ---
 function generate(level){
   let items = [];
   for(let type in levelConfig[level]){
     const count = levelConfig[level][type];
-    const pool = trashPool[type];
-    if(!pool || pool.length===0) continue;
-    shuffle(pool);
+    const pool = shuffle([...trashPool[type]]);
     for(let i=0; i<Math.min(count,pool.length); i++){
       items.push({...pool[i], type});
     }
@@ -91,33 +89,52 @@ function generate(level){
   return shuffle(items);
 }
 
-// --- START GAME ---
+// --- START GAME WITH FADE ---
 function startGame(level){
-  document.querySelectorAll(".screen").forEach(s=>s.classList.remove("active"));
-  document.getElementById("game").classList.add("active");
-  document.getElementById("level-title").textContent=`Lygis: ${level.charAt(0).toUpperCase()+level.slice(1)}`;
+  // black fade overlay
+  const fadeDiv = document.createElement('div');
+  fadeDiv.style.position='fixed';
+  fadeDiv.style.top='0';
+  fadeDiv.style.left='0';
+  fadeDiv.style.width='100%';
+  fadeDiv.style.height='100%';
+  fadeDiv.style.background='black';
+  fadeDiv.style.opacity='0';
+  fadeDiv.style.transition='opacity 0.5s';
+  fadeDiv.style.zIndex='9999';
+  document.body.appendChild(fadeDiv);
 
-  trashItems = generate(level);
-  total = trashItems.length;
-  currentIndex = 0;
-  correct = 0;
-  mistakes = [];
-  history = [];
+  fadeDiv.style.opacity='1';
+  setTimeout(()=>{
+    document.querySelectorAll(".screen").forEach(s=>s.classList.remove("active"));
+    document.getElementById("game").classList.add("active");
+    document.getElementById("level-title").textContent=`Lygis: ${level.charAt(0).toUpperCase()+level.slice(1)}`;
 
-  const binsEl = document.getElementById("bins");
-  binsEl.innerHTML="";
-  bins.forEach(b=>{
-    // Jeigu lygio konfigūracijoje nėra šio tipo, vis tiek pridėk konteinerį
-    const d=document.createElement("div");
-    d.className="bin";
-    d.textContent=b.name;
-    d.onclick=()=>chooseBin(b.type);
-    binsEl.appendChild(d);
-  });
+    trashItems = generate(level);
+    total = trashItems.length;
+    currentIndex = 0;
+    correct = 0;
+    mistakes = [];
+    history = [];
 
-  renderTrash();
-  const bgMusic = document.getElementById("bgMusic");
-  if(bgMusic.paused) bgMusic.play();
+    const binsEl = document.getElementById("bins");
+    binsEl.innerHTML="";
+    bins.forEach(b=>{
+      const d=document.createElement("div");
+      d.className="bin";
+      d.textContent=b.name;
+      d.onclick=()=>chooseBin(b.type);
+      binsEl.appendChild(d);
+    });
+
+    renderTrash();
+    const bgMusic = document.getElementById("bgMusic");
+    bgMusic.volume = 0.65;
+    if(bgMusic.paused) bgMusic.play();
+
+    fadeDiv.style.opacity='0';
+    setTimeout(()=>fadeDiv.remove(), 500);
+  }, 500);
 }
 
 // --- RENDER TRASH ---
@@ -201,7 +218,7 @@ function resetGame(){
   mistakes = [];
 }
 
-// --- CONFETTI ---
+// --- CONFETTI WITH FADE OUT ---
 function startConfetti(){
   const canvas = document.getElementById("confetti");
   const ctx = canvas.getContext("2d");
@@ -219,8 +236,10 @@ function startConfetti(){
     });
   }
   let angle=0;
+  let alpha = 1;
   function draw(){
     ctx.clearRect(0,0,canvas.width,canvas.height);
+    ctx.globalAlpha = alpha;
     confetti.forEach(f=>{
       ctx.beginPath();
       ctx.lineWidth=f.r;
@@ -236,4 +255,14 @@ function startConfetti(){
     requestAnimationFrame(draw);
   }
   draw();
+  // fade out po 5 sekundžių
+  setTimeout(()=>{
+    let fadeInterval = setInterval(()=>{
+      alpha -= 0.02;
+      if(alpha <= 0){
+        alpha = 0;
+        clearInterval(fadeInterval);
+      }
+    },30);
+  },5000);
 }
