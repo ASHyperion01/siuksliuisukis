@@ -91,7 +91,6 @@ function generate(level){
 
 // --- START GAME WITH FADE ---
 function startGame(level){
-  // black fade overlay
   const fadeDiv = document.createElement('div');
   fadeDiv.style.position='fixed';
   fadeDiv.style.top='0';
@@ -120,6 +119,7 @@ function startGame(level){
     const binsEl = document.getElementById("bins");
     binsEl.innerHTML="";
     bins.forEach(b=>{
+      if(!levelConfig[level][b.type]) return;
       const d=document.createElement("div");
       d.className="bin";
       d.textContent=b.name;
@@ -134,7 +134,7 @@ function startGame(level){
 
     fadeDiv.style.opacity='0';
     setTimeout(()=>fadeDiv.remove(), 500);
-  }, 500);
+  },500);
 }
 
 // --- RENDER TRASH ---
@@ -255,7 +255,6 @@ function startConfetti(){
     requestAnimationFrame(draw);
   }
   draw();
-  // fade out po 5 sekundžių
   setTimeout(()=>{
     let fadeInterval = setInterval(()=>{
       alpha -= 0.02;
