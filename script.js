@@ -14,7 +14,6 @@ const trashPool = {
   plastic:[
     {img:"https://allcitycandy.com/cdn/shop/products/a5214c3a-8860-4d09-aab4-70524e7a0921.8ccd57d5e98c67f93544c8a059fe15b9.jpg?v=1632837195"},
     {img:"https://naturaliosidejos.lt/1604-large_default/perfumed-liquid-soap-500ml-tobacco-oak.jpg"},
-    {img:"https://m.media-amazon.com/images/I/51zMzLXAsqL.jpg"},
     {img:"https://upload.wikimedia.org/wikipedia/commons/thumb/a/a2/Bubble_Tea.png/250px-Bubble_Tea.png"},
     {img:"https://5.imimg.com/data5/CJ/LM/MM/SELLER-47837534/plastic-tooth-brush.jpg"},
     {img:"https://kitstore.s57.cdn-upgates.com/_cache/2/a/2af5c373dbe23fdd00e9e3ddfcb81972-42163-1.jpg"},
@@ -265,4 +264,5 @@ function startConfetti(){
     },30);
   },5000);
 }
+
 
