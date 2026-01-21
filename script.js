@@ -12,7 +12,7 @@ const explanations = {
 // --- TRASH POOL ---
 const trashPool = {
   plastic:[
-    {img:"https://images.squarespace-cdn.com/content/v1/5d3178f5c443690001caace9/1678859744004-BOMG3CF0079ZV2LIDL3P/KB-PA-3030.jpg"},
+    {img:"https://allcitycandy.com/cdn/shop/products/a5214c3a-8860-4d09-aab4-70524e7a0921.8ccd57d5e98c67f93544c8a059fe15b9.jpg?v=1632837195"},
     {img:"https://naturaliosidejos.lt/1604-large_default/perfumed-liquid-soap-500ml-tobacco-oak.jpg"},
     {img:"https://m.media-amazon.com/images/I/51zMzLXAsqL.jpg"},
     {img:"https://upload.wikimedia.org/wikipedia/commons/thumb/a/a2/Bubble_Tea.png/250px-Bubble_Tea.png"},
@@ -24,8 +24,8 @@ const trashPool = {
     {img:"https://static.vecteezy.com/system/resources/thumbnails/011/643/706/small/business-newspaper-isolated-on-white-background-daily-newspaper-mock-up-concept-photo.jpg"},
     {img:"https://sadlers.co.uk/cdn/shop/files/AJ728A.jpg?v=1753784030&width=800"},
     {img:"https://sugarpaper.com/cdn/shop/files/NBK75_LargeSpiralNotebook_Black_Cover.jpg"},
-    {img:"https://allcitycandy.com/cdn/shop/products/a5214c3a-8860-4d09-aab4-70524e7a0921.8ccd57d5e98c67f93544c8a059fe15b9.jpg?v=1632837195"},
-    {img:"https://m.media-amazon.com/images/I/51zMzLXAsqL.jpg"}
+    {img:"https://images.squarespace-cdn.com/content/v1/5d3178f5c443690001caace9/1678859744004-BOMG3CF0079ZV2LIDL3P/KB-PA-3030"},
+    {img:"https://m.media-amazon.com/images/I/51zMzLXAsqL.jpgc"}
   ],
   organic:[
     {img:"https://preview.free3d.com/img/2015/05/1876171187512411691/jvskip50.jpg"},
@@ -35,7 +35,7 @@ const trashPool = {
     {img:"https://www.allthatgrows.in/cdn/shop/products/Carrot-Orange.jpg?v=1598079671"}
   ],
   electronics:[
-    {img:"https://new.ksd-images.lt/display?path=aikido/store/464f97037cbf126b5be6ba9a5f272f.jpg&h=742&op=fit&w=816"},
+    {img:"https://m.media-amazon.com/images/I/61XmhmEup8L._AC_SL1000_.jpg"},
     {img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ1MwkxMbU7_tkvqCdounLlr1PXcBf3KtaGhA&s"},
     {img:"https://cdn11.bigcommerce.com/s-8vy557m296/images/stencil/original/products/342/4555/30_SMC2266KS_3QR_WEB__24717.1740693309.JPG?c=2"},
     {img:"https://i.redd.it/raajbqqtrpq41.jpg"}
@@ -265,3 +265,4 @@ function startConfetti(){
     },30);
   },5000);
 }
+
