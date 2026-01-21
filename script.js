@@ -1,16 +1,16 @@
-let trashItems = [], currentIndex = 0, correct = 0, total = 0, history = [], mistakes = [];
+let trashItems=[], currentIndex=0, correct=0, total=0, mistakes=[], history=[];
 
-const explanations = {
-  plastic: "Plastikas suyra labai lėtai ir turi būti perdirbamas atskirai.",
-  paper: "Popierius lengvai perdirbamas, jei nėra užterštas.",
-  organic: "Organinės atliekos suyra natūraliai ir gali tapti kompostu.",
-  electronics: "Elektronikoje yra pavojingų medžiagų.",
-  glass: "Stiklas perdirbamas neribotą kiekį kartų.",
-  bulky: "Didžiagabaritės atliekos turi būti specialiai perdirbamos."
+const explanations={
+  plastic:"Plastikas suyra labai lėtai ir turi būti perdirbamas atskirai.",
+  paper:"Popierius lengvai perdirbamas, jei nėra užterštas.",
+  organic:"Organinės atliekos suyra natūraliai ir gali tapti kompostu.",
+  electronics:"Elektronikoje yra pavojingų medžiagų.",
+  glass:"Stiklas perdirbamas neribotą kiekį kartų.",
+  bulky:"Didžiagabaritės atliekos turi būti specialiai perdirbamos."
 };
 
-// --- VISOS ŠIUKLĖS NUOTRAUKOS ---
-const trashPool = {
+// TRASH POOL
+const trashPool={
   plastic:[
     {img:"https://images.squarespace-cdn.com/content/v1/5d3178f5c443690001caace9/1678859744004-BOMG3CF0079ZV2LIDL3P/KB-PA-3030.jpg"},
     {img:"https://naturaliosidejos.lt/1604-large_default/perfumed-liquid-soap-500ml-tobacco-oak.jpg"},
@@ -60,11 +60,10 @@ const trashPool = {
   ]
 };
 
-// --- LYGIŲ KONFIGURACIJA ---
-const levelConfig = {
-  easy: {plastic:4,paper:4,organic:4,electronics:2,glass:2},
-  medium: {plastic:5,paper:5,organic:4,electronics:3,glass:3},
-  hard: {plastic:5,paper:5,organic:5,electronics:4,glass:4,bulky:3}
+const levelConfig={
+  easy:{plastic:4,paper:4,organic:4,electronics:2,glass:2},
+  medium:{plastic:5,paper:5,organic:4,electronics:3,glass:3},
+  hard:{plastic:5,paper:5,organic:5,electronics:4,glass:4,bulky:3}
 };
 
 const bins=[
@@ -78,50 +77,32 @@ const bins=[
 
 function shuffle(a){return a.sort(()=>Math.random()-0.5);}
 
-function generate(level){
-  let items=[];
-  for(let t in levelConfig[level]){
-    shuffle([...trashPool[t]]).slice(0,levelConfig[level][t]).forEach(i=>items.push({...i,type:t}));
-  }
-  return shuffle(items);
-}
-
-// --- RENDER TRASH ---
-function renderTrash(){
-  const trash = document.getElementById("trash");
-  trash.innerHTML="";
-  trashItems.forEach((item,index)=>{
-    const d = document.createElement("div");
-    d.className="trash-item";
-    d.dataset.type=item.type;
-
-    const img = document.createElement("img");
-    img.src=item.img;
-    d.appendChild(img);
-
-    d.onclick = ()=>{
-      document.querySelectorAll(".trash-item").forEach(t=>t.classList.remove("selected"));
-      d.classList.add("selected");
-    };
-
-    trash.appendChild(d);
-    setTimeout(()=>d.classList.add("show"), index*100);
-  });
-}
-
-// --- START GAME ---
-window.startGame=function(level){
+function startGame(level){
   document.querySelectorAll(".screen").forEach(s=>s.classList.remove("active"));
   document.getElementById("game").classList.add("active");
+
   document.getElementById("level-title").textContent=`Lygis: ${level.charAt(0).toUpperCase()+level.slice(1)}`;
 
-  trashItems=generate(level);
-  total=trashItems.length;
-  currentIndex=0;
-  correct=0;
-  mistakes=[];
-  history=[];
+  trashItems=[];
+  for(let t in levelConfig[level]){
+    shuffle([...trashPool[t]]).slice(0,levelConfig[level][t]).forEach(i=>trashItems.push({...i,type:t}));
+  }
+  trashItems=shuffle(trashItems);
 
+  currentIndex=0; correct=0; total=trashItems.length; mistakes=[];
+
+  renderTrash();
+  renderBins(level);
+  document.getElementById("music").play();
+}
+
+function renderTrash(){
+  const img=document.getElementById("trash-img");
+  if(currentIndex>=trashItems.length) return;
+  img.src=trashItems[currentIndex].img;
+}
+
+function renderBins(level){
   const binsEl=document.getElementById("bins");
   binsEl.innerHTML="";
   bins.forEach(b=>{
@@ -132,30 +113,22 @@ window.startGame=function(level){
     d.onclick=()=>chooseBin(b.type);
     binsEl.appendChild(d);
   });
-
-  renderTrash();
-};
-
-// --- CHOOSE BIN ---
-function chooseBin(type){
-  const selected=document.querySelector(".trash-item.selected");
-  if(!selected) return;
-
-  const idx = Array.from(selected.parentNode.children).indexOf(selected);
-  if(trashItems[idx].type===type) correct++;
-  else mistakes.push({img:trashItems[idx].img,correct:trashItems[idx].type});
-
-  selected.remove();
-
-  if(document.querySelectorAll(".trash-item").length===0) finishGame();
 }
 
-// --- FINISH GAME ---
+function chooseBin(type){
+  const current=trashItems[currentIndex];
+  if(current.type===type) correct++;
+  else mistakes.push({img:current.img, correct:current.type});
+  currentIndex++;
+  if(currentIndex<trashItems.length) renderTrash();
+  else finishGame();
+}
+
 function finishGame(){
   document.querySelectorAll(".screen").forEach(s=>s.classList.remove("active"));
   document.getElementById("result").classList.add("active");
 
-  const percent = Math.round(correct/total*100);
+  let percent=Math.round(correct/total*100);
   let msg="";
   if(percent<10) msg="Išmok rūšiuoti!";
   else if(percent<20) msg="10% tikslumas";
@@ -169,8 +142,7 @@ function finishGame(){
   else if(percent<100) msg="90% tikslumas";
   else msg="Puiku! 100% 🎉";
 
-  document.getElementById("score").textContent=`Teisingai: ${correct} / ${total} (${msg})`;
-
+  document.getElementById("score-result").textContent=`Teisingai: ${correct}/${total} (${msg})`;
   const mistakesDiv=document.getElementById("mistakes");
   mistakesDiv.innerHTML="";
   mistakes.forEach(m=>{
@@ -182,18 +154,20 @@ function finishGame(){
   startConfetti();
 }
 
-// --- RESET GAME ---
-window.resetGame=function(){
+function resetGame(){
   document.querySelectorAll(".screen").forEach(s=>s.classList.remove("active"));
   document.getElementById("start-screen").classList.add("active");
-};
+  document.getElementById("music").pause();
+  document.getElementById("music").currentTime=0;
+}
 
-// --- CONFETTI ---
+// CONFETTI
 function startConfetti(){
   const canvas=document.getElementById("confetti");
   const ctx=canvas.getContext("2d");
   canvas.width=window.innerWidth;
   canvas.height=window.innerHeight;
+
   let particles=[];
   for(let i=0;i<200;i++){
     particles.push({
@@ -209,7 +183,6 @@ function startConfetti(){
   let startTime=Date.now();
   function draw(){
     const elapsed=(Date.now()-startTime)/1000;
-    if(elapsed>5) return;
     ctx.clearRect(0,0,canvas.width,canvas.height);
     particles.forEach(p=>{
       ctx.beginPath();
@@ -221,7 +194,9 @@ function startConfetti(){
       if(p.y>canvas.height){p.y=-10;p.x=Math.random()*canvas.width;}
     });
     angle+=0.02;
-    requestAnimationFrame(draw);
+    if(elapsed<5) requestAnimationFrame(draw);
+    else canvas.style.transition="opacity 1s", canvas.style.opacity=0;
   }
+  canvas.style.opacity=1;
   draw();
 }
