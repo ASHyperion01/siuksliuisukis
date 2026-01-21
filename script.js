@@ -1,4 +1,4 @@
-let trashItems=[], currentIndex=0, correct=0, total=0, history=[], mistakes=[];
+let trashItems = [], currentIndex = 0, correct = 0, total = 0, history = [], mistakes = [];
 
 const explanations = {
   plastic:"Plastikas suyra labai lėtai ir turi būti perdirbamas atskirai.",
@@ -75,10 +75,18 @@ const bins = [
 ];
 
 function shuffle(a){return a.sort(()=>Math.random()-0.5);}
+
+// --- GENERATE TRASH ---
 function generate(level){
-  let items=[];
-  for(let t in levelConfig[level]){
-    shuffle([...trashPool[t]]).slice(0,levelConfig[level][t]).forEach(i=>items.push({...i,type:t}));
+  let items = [];
+  for(let type in levelConfig[level]){
+    const count = levelConfig[level][type];
+    const pool = trashPool[type];
+    if(!pool || pool.length===0) continue;
+    shuffle(pool);
+    for(let i=0; i<Math.min(count,pool.length); i++){
+      items.push({...pool[i], type});
+    }
   }
   return shuffle(items);
 }
@@ -99,7 +107,7 @@ function startGame(level){
   const binsEl = document.getElementById("bins");
   binsEl.innerHTML="";
   bins.forEach(b=>{
-    if(!levelConfig[level][b.type]) return;
+    // Jeigu lygio konfigūracijoje nėra šio tipo, vis tiek pridėk konteinerį
     const d=document.createElement("div");
     d.className="bin";
     d.textContent=b.name;
@@ -108,19 +116,20 @@ function startGame(level){
   });
 
   renderTrash();
-  document.getElementById("bgMusic").play();
+  const bgMusic = document.getElementById("bgMusic");
+  if(bgMusic.paused) bgMusic.play();
 }
 
-// --- RENDER SINGLE TRASH ---
+// --- RENDER TRASH ---
 function renderTrash(){
   const trashContainer = document.getElementById("trash");
   trashContainer.innerHTML="";
-  if(currentIndex>=trashItems.length) return;
+  if(currentIndex >= trashItems.length) return;
   const item = trashItems[currentIndex];
-  const div=document.createElement("div");
-  div.className="trash-item";
+  const div = document.createElement("div");
+  div.className = "trash-item";
   const img = document.createElement("img");
-  img.src=item.img;
+  img.src = item.img;
   div.appendChild(img);
   trashContainer.appendChild(div);
 }
@@ -128,38 +137,38 @@ function renderTrash(){
 // --- CHOOSE BIN ---
 function chooseBin(type){
   const item = trashItems[currentIndex];
-  if(item.type===type) correct++;
+  if(item.type === type) correct++;
   else mistakes.push({img:item.img, correct:item.type});
   history.push(currentIndex);
   currentIndex++;
-  if(currentIndex>=trashItems.length) finishGame();
+  if(currentIndex >= trashItems.length) finishGame();
   else renderTrash();
 }
 
 // --- REWIND ---
 function previousTrash(){
-  if(history.length===0) return;
+  if(history.length === 0) return;
   currentIndex = history.pop();
   renderTrash();
 }
 
-// --- FINISH GAME ---
+// --- FINISH ---
 function finishGame(){
   document.querySelectorAll(".screen").forEach(s=>s.classList.remove("active"));
   document.getElementById("result").classList.add("active");
 
   const percent = Math.round(correct/total*100);
-  let msg="";
-  if(percent<10) msg="Išmok rūšiuoti!";
-  else if(percent<20) msg="10% tikslumas";
-  else if(percent<30) msg="20% tikslumas";
-  else if(percent<40) msg="30% tikslumas";
-  else if(percent<50) msg="40% tikslumas";
-  else if(percent<60) msg="50% tikslumas";
-  else if(percent<70) msg="60% tikslumas";
-  else if(percent<80) msg="70% tikslumas";
-  else if(percent<90) msg="80% tikslumas";
-  else if(percent<100) msg="90% tikslumas";
+  let msg = "";
+  if(percent < 10) msg="Išmok rūšiuoti!";
+  else if(percent < 20) msg="10% tikslumas";
+  else if(percent < 30) msg="20% tikslumas";
+  else if(percent < 40) msg="30% tikslumas";
+  else if(percent < 50) msg="40% tikslumas";
+  else if(percent < 60) msg="50% tikslumas";
+  else if(percent < 70) msg="60% tikslumas";
+  else if(percent < 80) msg="70% tikslumas";
+  else if(percent < 90) msg="80% tikslumas";
+  else if(percent < 100) msg="90% tikslumas";
   else msg="Puiku! 100% 🎉";
 
   document.getElementById("score").textContent=`Teisingai: ${correct} / ${total} (${msg})`;
@@ -192,7 +201,7 @@ function resetGame(){
   mistakes = [];
 }
 
-// --- SIMPLE CONFETTI EFFECT ---
+// --- CONFETTI ---
 function startConfetti(){
   const canvas = document.getElementById("confetti");
   const ctx = canvas.getContext("2d");
