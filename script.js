@@ -24,7 +24,7 @@ const trashPool = {
     {img:"https://sadlers.co.uk/cdn/shop/files/AJ728A.jpg?v=1753784030&width=800"},
     {img:"https://sugarpaper.com/cdn/shop/files/NBK75_LargeSpiralNotebook_Black_Cover.jpg"},
     {img:"https://images.squarespace-cdn.com/content/v1/5d3178f5c443690001caace9/1678859744004-BOMG3CF0079ZV2LIDL3P/KB-PA-3030"},
-    {img:"https://m.media-amazon.com/images/I/51zMzLXAsqL.jpgc"}
+    {img:"https://m.media-amazon.com/images/I/51zMzLXAsqL.jpg"}
   ],
   organic:[
     {img:"https://preview.free3d.com/img/2015/05/1876171187512411691/jvskip50.jpg"},
@@ -264,5 +264,6 @@ function startConfetti(){
     },30);
   },5000);
 }
+
 
 
